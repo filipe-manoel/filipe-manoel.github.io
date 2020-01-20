@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects | Sabrina Amorim</title>
+    <link>https://sabrinaam.github.io/project/</link>
+      <atom:link href="https://sabrinaam.github.io/project/index.xml" rel="self" type="application/rss+xml" />
+    <description>Projects</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 20 Jan 2020 12:11:28 -0300</lastBuildDate>
+    <image>
+      <url>https://sabrinaam.github.io/img/icon-192.png</url>
+      <title>Projects</title>
+      <link>https://sabrinaam.github.io/project/</link>
+    </image>
+    
+    <item>
+      <title>Study of the Genetic Variability of Meat Fatty Acid Profile in Nelore Cattle Finished in Feedlot</title>
+      <link>https://sabrinaam.github.io/project/study-of-the-genetic-variability-of-meat-fatty-acid-profile-in-nelore-cattle-finished-in-feedlot/</link>
+      <pubDate>Mon, 20 Jan 2020 12:11:28 -0300</pubDate>
+      <guid>https://sabrinaam.github.io/project/study-of-the-genetic-variability-of-meat-fatty-acid-profile-in-nelore-cattle-finished-in-feedlot/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Genomic Evaluation in Commercial Beef Cattle Population Using Real and Simulated Data</title>
+      <link>https://sabrinaam.github.io/project/genomic-evaluation-in-commercial-beef-cattle-population-using-real-and-simulated-data/</link>
+      <pubDate>Mon, 20 Jan 2020 12:09:42 -0300</pubDate>
+      <guid>https://sabrinaam.github.io/project/genomic-evaluation-in-commercial-beef-cattle-population-using-real-and-simulated-data/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Epistatic Interactions Associated With Fatty Acid Profile of Beef From Nellore Cattle</title>
+      <link>https://sabrinaam.github.io/project/epistatic-interactions-associated-with-fatty-acid-profile-of-beef-from-nellore-cattle/</link>
+      <pubDate>Mon, 20 Jan 2020 12:07:03 -0300</pubDate>
+      <guid>https://sabrinaam.github.io/project/epistatic-interactions-associated-with-fatty-acid-profile-of-beef-from-nellore-cattle/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>An Assessment of the Relationship Between Genomic Connectedness and Prediction Accuracy for Fat Composition Traits in Nellore Beef Cattle</title>
+      <link>https://sabrinaam.github.io/project/an-assessment-of-the-relationship-between-genomic-connectedness-and-prediction-accuracy-for-fat-composition-traits-in-nellore-beef-cattle/</link>
+      <pubDate>Mon, 20 Jan 2020 11:57:57 -0300</pubDate>
+      <guid>https://sabrinaam.github.io/project/an-assessment-of-the-relationship-between-genomic-connectedness-and-prediction-accuracy-for-fat-composition-traits-in-nellore-beef-cattle/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

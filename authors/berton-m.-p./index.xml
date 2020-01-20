@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Berton M. P. | Sabrina Amorim</title>
+    <link>https://sabrinaam.github.io/authors/berton-m.-p./</link>
+      <atom:link href="https://sabrinaam.github.io/authors/berton-m.-p./index.xml" rel="self" type="application/rss+xml" />
+    <description>Berton M. P.</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 11 Sep 2018 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://sabrinaam.github.io/img/icon-192.png</url>
+      <title>Berton M. P.</title>
+      <link>https://sabrinaam.github.io/authors/berton-m.-p./</link>
+    </image>
+    
+    <item>
+      <title>Genomic Study for Maternal Related Traits in Santa Inês Sheep Breed</title>
+      <link>https://sabrinaam.github.io/publication/genomic-study-for-maternal-related-traits-in-santa-ines-sheep-breed/</link>
+      <pubDate>Tue, 11 Sep 2018 00:00:00 +0000</pubDate>
+      <guid>https://sabrinaam.github.io/publication/genomic-study-for-maternal-related-traits-in-santa-ines-sheep-breed/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

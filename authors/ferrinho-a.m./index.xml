@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ferrinho A.M. | Sabrina Amorim</title>
+    <link>https://sabrinaam.github.io/authors/ferrinho-a.m./</link>
+      <atom:link href="https://sabrinaam.github.io/authors/ferrinho-a.m./index.xml" rel="self" type="application/rss+xml" />
+    <description>Ferrinho A.M.</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 22 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://sabrinaam.github.io/img/icon-192.png</url>
+      <title>Ferrinho A.M.</title>
+      <link>https://sabrinaam.github.io/authors/ferrinho-a.m./</link>
+    </image>
+    
+    <item>
+      <title>Comparison Between Haplotype‐based and Individual Snp‐based Genomic Predictions for Beef Fatty Acid Profile in Nelore Cattle</title>
+      <link>https://sabrinaam.github.io/publication/comparison-between-haplotypebased-and-individual-snpbased-genomic-predictions-for-beef-fatty-acid-profile-in-nelore-cattle/</link>
+      <pubDate>Sun, 22 Dec 2019 00:00:00 +0000</pubDate>
+      <guid>https://sabrinaam.github.io/publication/comparison-between-haplotypebased-and-individual-snpbased-genomic-predictions-for-beef-fatty-acid-profile-in-nelore-cattle/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
