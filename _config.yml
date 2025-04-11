@@ -6,14 +6,14 @@
 # `jekyll serve`. If you change this file, please restart the server process.
 
 # Site Settings
-locale                   : "Gainesville - Florida"
-title                    : "Marco Antonio Peixoto"
+locale                   : "Piracicaba - São Paulo - Brazil"
+title                    : "Filipe Manoel Ferreira"
 title_separator          : "-"
 name                     : &name "Your Name"
 description              : &description "personal description"
-url                      : https://marcopxt.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+url                      : https://filipe-manoel.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
-repository               : "marcopxt/marcopxt.github.io"
+repository               : "filipe-manoel/filipe-manoel.github.io"
 teaser                   :  # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"
 breadcrumbs              : false # true, false (default)
 words_per_minute         : 160
@@ -80,13 +80,13 @@ analytics:
 
 # Site Author
 author:
-  name             : "Marco Antonio Peixoto"
+  name             : "Filipe Manoel Ferreira"
   avatar           : "profile.jpeg"
   bio              : "Quantitative Genetics | Breeding Modeling | Predictive Breeding | Mixed Models"
   location         : "Gainesville - Florida"
   employer         :
   pubmed           : #"https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
-  googlescholar    : "https://scholar.google.com/citations?user=E6dbV9QAAAAJ&hl=pt-BR"
+  googlescholar    : "https://scholar.google.com/citations?user=vuuzcpMAAAAJ&hl=en"
   email            :
   researchgate     : # "https://www.researchgate.net/profile/Marco-Peixoto-2"
   uri              :
@@ -96,20 +96,20 @@ author:
   flickr           :
   facebook         :
   foursquare       :
-  github           : "marcopxt"
+  github           : "filipe-manoel"
   google_plus      :
   keybase          :
   instagram        :
   impactstory      : #"https://profiles.impactstory.org/u/xxxx-xxxx-xxxx-xxxx"
   lastfm           : 
-  linkedin         : "https://www.linkedin.com/in/marco-antonio-peixoto-088660194/"
+  linkedin         : "https://www.linkedin.com/in/filipe-manoel-ferreira/"
   orcid            : # "https://orcid.org/my-orcid?orcid=0000-0003-0564-7068"
   pinterest        :
   soundcloud       :
   stackoverflow    : # http://stackoverflow.com/users/123456/username
   steam            :
   tumblr           :
-  twitter          : "marcopxt"
+  twitter          : #"filipe-manoel"
   vine             :
   weibo            :
   xing             :
