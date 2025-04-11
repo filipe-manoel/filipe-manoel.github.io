@@ -10,8 +10,9 @@ redirect_from:
 
 <br>
 
-Hi! My name is **Marco Antônio Peixoto**, a **Postdoctoral Associate** at the Sweet Corn and Potato Breeding and Genomics lab, working in collaboration with Dr. Márcio Resende Jr. I graduated in genetics and breeding at the Federal University of Viçosa with a big focus on quantitative genetics. My main interest is in the use and application of statistical genetics and genomic tools to increase genetic gain, efficiency, and speed up breeding programs. The research tools include genomic selection, GWAS, breeding program simulations, mate-pair allocation and optimization using additive, non-additive, cross variance, and restricting from inbreeding rates, development of tools and algorithms in R language, and low-density panel imputation.
-
+Hi! My name is **Filipe Manoel Ferreira**.
+I hold a Ph.D. and a Master’s degree from the Graduate Program in Genetics and Breeding at UFV. I also studied Forest Engineering at the DEF of UFV and in the University of Montana (EUA) and earned a Forest Technician degree at IFET-Rio Pomba. Currently, I am a postdoctoral researcher at FCA-UNESP. 
+I have experience in forest breeding, quantitative genetics, and experimental data analysis. My research focuses on developing statistical genetics tools, mixed models, genomic selection, and programming. I believe breeding is increasingly connected with data science, so my goal is to develop and implement analytical tools that transform breeding data into knowledge, guiding decisions and ultimately improving genetic gain.
 
 <br>
 
@@ -19,16 +20,14 @@ Hi! My name is **Marco Antônio Peixoto**, a **Postdoctoral Associate** at the S
 
 Feel free to contact me:  
 
-**Marco Antonio Peixoto**  
-*Sweet Corn Breeding and Genomics lab*  
-Horticultural Sciences Department | IFAS - University of Florida  
-deamorimpeixotom@ufl.edu  
-marco.peixotom@gmail.com  
-+1 (352) 871-7239  
+**Filipe Manoel Ferreira**  
+*3Lab: Tree Genetics and Breeding Laboratory*  
+Forest Sciences Department (LCF) | Esalq - University of São Paulo (USP)
+ferreira.fmanoel@gmail.com  
++55 (32) 99941-8878 
 
 
 <br>
 
 ## Reach out to me
-[![Twitter Badge](https://img.shields.io/badge/-@marcopxt-6cc?style=flat-square&labelColor=6cc&logo=twitter&logoColor=white&link=https://twitter.com/marcopxt)](https://twitter.com/marcopxt)
-[![Linkedin Badge](https://img.shields.io/badge/-Marco%20Antônio%20Peixoto-6cc?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/marco-antonio-peixoto-088660194/)](https://www.linkedin.com/in/marco-antônio-peixoto-088660194/)
+[![Linkedin Badge](https://img.shields.io/badge/-Filipe%20Manoel%20Ferreira-6cc?style=flat-square&logo=Linkedin&logoColor=white&link=https://https://www.linkedin.com/in/filipe-manoel-ferreira/)](https://www.linkedin.com/in/filipe-manoel-ferreira/)
