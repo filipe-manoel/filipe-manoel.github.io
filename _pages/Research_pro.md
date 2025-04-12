@@ -29,15 +29,14 @@ The performance of individual plants and the accuracy of genetic selection can b
 
 We published 2 papers and 1 R package about genetic competition models.
 You can check the first paper [here](https://doi.org/10.1016/j.foreco.2023.121393). 
-The second paper can be found [here](https://doi.org/10.1016/j.foreco.2024.121892)
+The second paper can be found [here](https://doi.org/10.1016/j.foreco.2024.121892).
 
 
 As part of this topic, we created an R package for fitting genetic competion models.
 *gencomp* can be downloaded from [here](https://github.com/Kaio-Olimpio/gencomp). 
 Check out the [*gencomp* paper](https://doi.org/10.1038/s41437-024-00743-9)
 
-
-
+A more didatic article about genetic competition can be found [here](https://vsni.co.uk/competitive-genetics-exploring-the-impact-of-direct-and-indirect-genetic-effects-in-tree-breeding/).
 
 
 ***
