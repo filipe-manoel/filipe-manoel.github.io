@@ -25,7 +25,7 @@ The performance of individual plants and the accuracy of genetic selection can b
    - **Competition classification**  
    - **Package development**
 
-### SimpleMating
+### Publications and packages
 
 We published 2 papers and 1 R package about genetic competition models.
 You can check the first paper [here](https://doi.org/10.1016/j.foreco.2023.121393). 
