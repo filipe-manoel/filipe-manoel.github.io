@@ -9,25 +9,32 @@ author_profile: true
 
 
 
-## Cross prediction and optimization
+## Genetic competition on forest breeding
 
 ### Motivation  
 
-![Optim](../assets/images/Mate_Allocation.png){:width="40%" align="right"}
+![Optim](../assets/images/figura_anula_comp.png){:width="20%" align="right"}
 
-Plant breeding programs rely on balancing long-term genetic diversity and genetic gains, which are conflicting goals. Therefore, in the short term, plant breeding programs with genomic selection can improve performance by selecting individuals with the most outstanding genetic values for composing the next generation. Unfortunately, GS also accelerates the decrease of genetic diversity through cycles of selection. A method to deal with this corollary is cross selection, where we can jointly optimize the selection of crosses and the maintenance of genetic diversity. The combination of those factors (increasing the trait means and reducing inbreeding/coancestry) represents an important tool for selecting the best parents for the next generation.
+The performance of individual plants and the accuracy of genetic selection can be strongly influenced by genetic competition among neighboring genotypes. To better account for these interactions, models that partition observed genotypic variation into direct genotypic effects (DGEs) and competition effects—also known as indirect genotypic effects (IGEs)—were introduced by Muir (2005) and further developed by Cappa and Cantet (2008) using frequentist and Bayesian approaches, respectively. Our work explores the practical implications of IGEs in eucalypt breeding, particularly in contexts such as early selection and multi-age evaluations. We also propose selection strategies that leverage the depth and reliability of the information provided by these models for each individual. Furthermore, we use these models to predict high-performing combinations of clonal composites under intergenotypic competition, aiming to enhance genetic gain and stand productivity.
+
 
 - **Main topics:**
 
-   - **Usefulness prediction**  
-   - **Cross prediction**  
-   - **Non-additive effects**  
-   - **Cross optimization**
+   - **Genetic model's fitting**  
+   - **Clonal composites prediction**  
+   - **Competition classification**  
    - **Package development**
 
 ### SimpleMating
 
-As part of this topic, we created an R package for cross-optimization. SimpleMating can be downloaded from [here](https://github.com/Resende-Lab/SimpleMating). Check out the [paper](https://doi.org/10.1002/tpg2.20533)
+We published 2 papers and 1 R package about genetic competition models.
+You can check the first paper [here](https://doi.org/10.1016/j.foreco.2023.121393). 
+The second paper can be found [here](https://doi.org/10.1016/j.foreco.2024.121892)
+
+
+As part of this topic, we created an R package for fitting genetic competion models.
+*gencomp* can be downloaded from [here](https://github.com/Kaio-Olimpio/gencomp). 
+Check out the [*gencomp* paper](https://doi.org/10.1038/s41437-024-00743-9)
 
 
 
