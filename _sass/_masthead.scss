@@ -1,10 +1,11 @@
 /* ==========================================================================
-   MASTHEAD
+   MASTHEAD (3Lab Visual Identity – Harmonized with Navigation)
    ========================================================================== */
 
 .masthead {
   position: relative;
-  border-bottom: 1px solid $border-color;
+  background-color: #002147;      // 3Lab Navy Blue background
+  border-bottom: 3px solid #f97316; // Accent Orange border
   -webkit-animation: intro 0.3s both;
           animation: intro 0.3s both;
   -webkit-animation-delay: 0.15s;
@@ -14,9 +15,10 @@
   &__inner-wrap {
     @include container;
     @include clearfix;
-    padding: 1em 1em 1em;
+    padding: 1em;
     font-family: $sans-serif-narrow;
-
+    color: #ffffff;             // Set default text to white for readability
+     
     @include breakpoint($x-large) {
       max-width: $x-large;
     }
@@ -25,14 +27,20 @@
       z-index: 10;
     }
 
+    // Ensure anchor links inherit white text with an orange hover effect
     a {
       text-decoration: none;
+      color: inherit;           // Inherit white from parent
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #f97316;         // Change to accent orange on hover
+      }
     }
   }
 }
 
 .masthead__menu {
-
   ul {
     margin: 0;
     padding: 0;
@@ -45,6 +53,7 @@
   display: block;
   list-style-type: none;
   white-space: nowrap;
+  text-transform: uppercase;  // Ensure consistency with navigation menu styling
 
   &--lg {
     padding-right: 2em;
