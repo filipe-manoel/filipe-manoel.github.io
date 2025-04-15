@@ -11,7 +11,7 @@ This is a short course taught at the São Paulo State University in the Fall of 
 ## 2. Presentation
 ### Introduction to linear mixed models
 
-- Linear Mixed Modesl / Toy examples [[html]](https://htmlpreview.github.io/?https://github.com/filipe-manoel/filipe-manoel.github.io/blob/master/talks_teach/MM_R_LAMPAF/MM_R_LAMPAF.html)
+- Linear Mixed Models / Toy examples [[html]](https://filipe-manoel.github.io/talks_teach/MM_R_LAMPAF/MM_R_LAMPAF.html)
 
 ### Script
 
@@ -20,7 +20,6 @@ This is a short course taught at the São Paulo State University in the Fall of 
 ### Data
 
 - Data [[externalData]](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/filipe-manoel/filipe-manoel.github.io/blob/master/talks_teach/MM_R_LAMPAF/data_cupu.txt)
-
 
 
 
