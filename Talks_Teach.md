@@ -9,7 +9,7 @@ author_profile: true
 
 ### Classes
 
-- Quantitative Genetics (UF) - [Fall/2022](talks_teach/QuantGen/index.md)
+- Linear Mixed Models (FCA/UNESP-2025) - [Fall/2025](talks_teach/MM_R_LAMPAF/index.md)
 
 ### Workshop and Talks 
 

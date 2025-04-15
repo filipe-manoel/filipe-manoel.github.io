@@ -1,0 +1,38 @@
+/*-- scss:defaults --*/
+
+
+// colors
+
+$body-color: #000000 !default;
+$link-color: #16ADD2 !default;
+$selection-bg: #26351c !default;
+$code-block-bg: #E2DEDE;
+$code-block-border-color: #000000;
+
+// scss-docs-start border-variables
+$border-width:                1px !default;
+$border-widths: (
+  1: 1px,
+  2: 2px,
+  3: 3px,
+  4: 4px,
+  5: 5px
+) !default;
+
+$border-style:                solid !default;
+$border-color:                #16ADD2 !default;
+// scss-docs-end border-variables
+
+$border-top-width: 2px;
+$border-bottom-width: 10em;
+$border-top-color: #16ADD2;
+$border-bottom-color: #16ADD2;
+
+
+// headings
+$presentation-heading-color: #000000 !default;
+
+/*-- scss:rules --*/
+
+
+$line-height: 150%;

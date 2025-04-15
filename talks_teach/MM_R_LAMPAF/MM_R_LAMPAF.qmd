@@ -1,0 +1,2148 @@
+---
+format: 
+  revealjs:                    #Reveal.js is a framework for creating HTML slideshows.
+    theme: [simple,theme.scss] # Use the "simple" base theme and extend it with custom SCSS styles
+    progress: true             # True: Show a progress bar at the bottom of the slides
+    transition: fade           # Use a fade effect between slides
+    transition-speed: slow     # Make slide transitions slow (options: default, fast, slow)
+    tbl-cap-location: top      # Show table captions at the top 
+    scrollable: false          # False: Disable scrollbars inside slides (content must fit)
+    code-overflow: scroll      # Allow scrolling if code blocks overflow the slide
+    code-line-numbers: false   # False: Hide line numbers in code blocks
+    code-copy: hover           # Show a copy-to-clipboard button on hover for code blocks
+    from: markdown+emoji       # Enable emoji syntax like :smile:
+    multiplex: false           # Disable slide syncing across devices (advanced feature)
+    chalkboard: false          # True: Enable a virtual chalkboard/whiteboard for annotations
+    auto-stretch: false        # Disable automatic vertical content stretching
+    fig-format: svg            # Output figures as SVG (scalable vector graphics)
+    fig-align: center          # Center figures horizontally on the slide
+    fig-cap-location: margin   # Place figure captions in the margin
+    fig-dpi: 300               # Set high DPI for figures (mainly relevant for raster images)
+    bibliography: ref.bib      # Path to your BibTeX file for references
+    csl: apa.csl               # Citation style (CSL file), here using APA
+    touch: true                # True: Enable touch gestures for slide navigation
+    embed-resources: true      # True: Embed all external files into the .html (self-contained)
+---
+
+##  {background-color="#325A4B"}
+
+![](figures/logo_LAMPAF.png){.absolute top="0" left="850" width="200" height="130"} 
+
+<!-- ![](figures/logo_LAMPAF.png){.absolute top="0" right="850" width="250" height="200"} -->
+
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+::: {style="font-size: 1.3em; text-align: center"}
+[<b>Modelos mistos aplicados ao melhoramento genético</b>]{style="color:#FAFAFA"}
+:::
+
+<br>
+
+<br>
+
+::: {style="font-size: .9em; text-align: right"}
+[Dr. Filipe Manoel Ferreira]{style="color:#FAFAFA"}
+
+:::
+
+## Cronograma - Dia 1
+
+-   Introdução à genética quantitativa
+
+-   Introdução à teoria de modelos mistos
+
+-   Análise de um experimento em DBC
+
+-   Análise de um experimento em DBI
+
+
+```{r echo=FALSE, results='hide', warning=FALSE}
+library(kableExtra)
+library(desplot)
+write_matex <- function(x) {
+  begin <- "$$\\begin{bmatrix}"
+  end <- "\\end{bmatrix}$$"
+  X <-
+    apply(x, 1, function(x) {
+      paste(
+        paste(x, collapse = "&"),
+        "\\\\"
+      )
+    })
+  writeLines(c(begin, X, end))
+}
+write_matex2 <- function(x) {
+  begin <- "\\begin{bmatrix}"
+  end <- "\\end{bmatrix}"
+  X <-
+    apply(x, 1, function(x) {
+      paste(
+        paste(x, collapse = "&"),
+        "\\\\"
+      )
+    })
+  paste(c(begin, X, end), collapse = "")
+}
+```
+
+## Quem sou eu na fila do pão?
+
+::: columns
+::: {.column width="50%"}
+![](figures/filipe_linkedin.png){style="float:left"}
+:::
+
+::: {.column width="50%"}
+::: {style="font-size: 0.7em; text-align: left"}
+**Formação:**
+
+-   Eng. Florestal (UFV)
+-   M. Sc. Genética e Melhoramento (UFV)
+-   Dr. Genética e Melhoramento (UFV)
+-   Pós-doutorando no LAMPAF
+
+**Interesses:**
+
+-   Genética quantitativa
+-   Melhoramento Florestal
+-   Genética estatística
+-   Programação
+:::
+:::
+:::
+
+
+<!-- ## Quem é você na fila do pão? -->
+
+<!-- Nome, formação, trabalho atual, nível de experiência com modelos mistos e o software R. -->
+
+<!-- ![](figures/fig1.jpg){fig-align="center"} -->
+
+## Objetivos
+
+\
+
+::: columns
+::: {.column width="70%"}
+::: {style="font-size: 0.9em; text-align: left"}
+1. Entender conceitos básicos sobre genética quantitativa
+
+2. Entender como modelos mistos são aplicados nos melhoramentos de plantas
+
+3. Aprender a analisar e interpretar dados de DBC e DBI
+:::
+:::
+
+::: {.column width="30%"}
+![](figures/fig2.png){fig-align="right"}
+:::
+:::
+
+# Introdução à genética quantitativa {background-color="#325A4B"}
+
+## Princípios de genética quantitativa
+
+::: columns
+::: {.column width="50%"}
+\
+![](figures/mendel.png){width="60%"}
+:::
+
+::: {.column width="40%"}
+\
+![](figures/brunn.jpg){width="80%"}
+:::
+:::
+
+## Leis de Mendel
+
+\
+![](figures/ervilha.png)
+
+## Todas as características podem ser explicadas pelas leis de Mendel?
+
+::: columns
+::: {.column width="60%"}
+\
+
+![](figures/height.jpg){fig-align="left"}
+:::
+
+::: {.column width="40%"}
+\
+
+![](height_sex.gif){fig-align="right"}
+:::
+:::
+
+##  {.smaller}
+
+| Caráter Qualitativo                           | Caráter Quantitativo                                                |
+|-----------------------------|-------------------------------------------|
+| Controlado por um ou poucos genes              | Controlado por vários genes                                         |
+| Pouco influenciada pelo ambiente              | Muito influenciada pelo ambiente                                    |
+| Variação discreta (classes)            | Variação contínua                                            |
+| Estudo a nível de indivíduos                  | Estudo a nível de população (amostra)                               |
+| Contagem e proporção                          | Parâmetros estatísticos (média, variância, covariância, correlação) |
+| Análise de gerações: P1, P2, F1, F2, RC1, RC2 | Delineamentos experimentais e genéticos                             |
+| Cor da flor: branca ou roxa                   | Altura variação contínua                                            |
+
+: **Principais diferenças entre características quantitativas e quantitativas**
+
+##  {.smaller}
+
+::: {style="font-size: 1em; text-align: left"}
+Quanto maior o nº de genes $n$, maior o nº de classes genótípicas
+:::
+
+```{r warning=FALSE}
+# Criar histograma
+
+library(ggplot2)
+set.seed(14) 
+
+# Ajustar semente aleatória
+
+dados1 <- data.frame(obs = c(10, 10, 10, 5),
+                    clase = c("A_", "A_", "A_", "aa"))
+
+
+h1 <- ggplot(dados1, aes(x = obs, fill = clase)) + geom_bar(width = 2) +
+  geom_histogram( alpha=0.5, position="identity") + 
+  labs(title="Classes genotípicas para 1 gene com DC",x="Classe", y = "Frequência",fill = "Classe") +
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+        panel.grid = element_blank(),panel.background = element_blank(),
+        axis.line = element_line())
+
+
+dados2 <- data.frame(obs = c(10, 10, 7.5, 5),
+                     clase = c("AA", "AA", "Aa", "aa"))
+
+h2<- ggplot(dados2, aes(x = obs, fill = clase)) + geom_bar(width = 1.8) +
+  geom_histogram( alpha=0.5, position="identity") + 
+  labs(title="Classes genotípicas para 1 gene com AD",x="Classe", y = "Frequência",fill = "Classe") +
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+        panel.grid = element_blank(),panel.background = element_blank(),
+        axis.line = element_line())
+
+dados3 <- data.frame(obs = c(rep(1,9), rep(2,3), rep(3,3), 4),
+                     clase = c(rep("A_B_", 9), rep("A_bb",3), rep("aaB_",3),"aabb"))
+
+h3<- ggplot(dados3, aes(x = obs, fill = clase)) + geom_bar(width =0.5) +
+  geom_histogram( alpha=0.5, position="identity") + 
+  labs(title="Classes genotípicas para 1 gene com AD",x="Classe", y = "Frequência",fill = "Classe") +
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+        panel.grid = element_blank(),panel.background = element_blank(),
+        axis.line = element_line())
+
+dados3 <- data.frame(obs = c(rep(1,9), rep(2,3), rep(3,3), 4),
+                     clase = c(rep("A_B_", 9), rep("A_bb",3), rep("aaB_",3),"aabb"))
+
+h3<- ggplot(dados3, aes(x = obs, fill = clase)) + geom_bar(width =0.5) +
+  geom_histogram( alpha=0.5, position="identity") + 
+  labs(title="Classes genotípicas para 2 genes com DC",x="Classe", y = "Frequência",fill = "Classe")+
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+        panel.grid = element_blank(),panel.background = element_blank(),
+        axis.line = element_line())
+
+dados4 <- data.frame(obs = c(1, 2, 2, 3, 4, 4, 5, 5, 5, 5, 6, 6, 7, 8, 8, 9),
+                     clase = c("AABB", rep("AABb", 2), "AAbb", rep("AaBB",2), rep("AaBb",4),rep("Aabb",2), "aaBB", rep("aaBb",2), "aabb"))
+
+h4<- ggplot(dados4, aes(x = obs, fill = clase)) + geom_bar(width =0.5) +
+  geom_histogram( alpha=0.5, position="identity") + 
+  labs(title="Classes genotípicas para 2 genes com AD",x="Classe", y = "Frequência", fill = "Classe") +
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+        panel.grid = element_blank(),panel.background = element_blank(),
+        axis.line = element_line())
+
+library(patchwork)
+
+hist <- (h1 + h2)  / (h3 + h4)
+```
+
+```{r warning=FALSE, echo=FALSE}
+hist
+```
+
+::: {style="font-size: 0.7em; text-align: left"}
+-   nº classes genotípicas: $3^n$
+-   nº classes fenotípicas: DC = $2^n$ AD = $3^n$
+:::
+
+## Modelo infitesimal de Fisher
+
+::: {style="font-size: 0.9em; text-align: justify"}
+\
+A variação em uma característica quantitativa é influenciada por um número infinitamente grande de genes, cada um dos quais faz uma contribuição infinitamente pequena (infinitesimal) para o fenótipo, bem como por fatores ambientais.
+:::
+
+## Influência do Ambiente {.smaller}
+
+::: {.fragment .fade-in}
+::: {.fragment .semi-fade-out}
+-   Problema: quando a interação genótipos $\times$ ambientes (IGA) é responsável por alterar a ordem de classificação dos genótipos
+:::
+:::
+
+::: {.fragment .fade-in}
+::: {.fragment .semi-fade-out}
+-   Abordagens estatísticas devem ser utilizadas para explorar ou mitigar os impactos da IGA
+:::
+:::
+
+::: {.fragment .fade-in}
+::: {.fragment .semi-fade-out}
+-   Dentre elas destacam-se as baseadas em modelos mistos
+:::
+:::
+
+::: {.fragment .fade-in}
+::: {.fragment .semi-fade-out}
+-   Os modelos mistos são flexíveis permitindo:
+
+    -   Comparar diversas estruturas de covariância,
+    -   Estudar adaptabilidade e estabilidade
+    -   Identificar e subdividir a população-alvo de ambientes de acordo com o desempenho dos genótipos.
+:::
+:::
+
+
+# Introdução à teoria de modelos mistos {background-color="#325A4B"}
+
+![](figures/motivacao.jpg){width="50%" fig-align="center"}
+
+::: {style="font-size: 0.6em; text-align: left"}
+@vaneeuwijkWhatShouldStudents2016
+:::
+
+
+## Melhoramento genético {.smaller}
+::: {.fragment .fade-in}
+::: {.fragment .semi-fade-out}
+-   Deslocar a média de uma dada característica na direção desejada
+:::
+:::
+
+::: {.fragment .fade-in}
+::: {.fragment .semi-fade-out}
+-   Necessitam de conceitos estatísticos para decompor a variação observada em causas genéticas e ambientais.
+:::
+:::
+![](figures/pop.png){fig-align="center"}
+
+## Decompondo a variância observada {.smaller}
+
+![](figures/pop2.png){fig-align="center" width="70%"}
+
+::: {.fragment .fade-in}
+::: {.fragment .semi-fade-out}
+- Após **estimar** os componentes de variância, consigo **predizer** os valores genéticos para cada indivíduo
+:::
+:::
+
+::: {.fragment .fade-in}
+::: {.fragment .semi-fade-out}
+- Utilizar **desenhos experimentais** e conhecimentos de **estatística** e **genética quantitativa** para separar o efeito genotípico dos demais efeitos (ambiental)
+:::
+:::
+
+## Modelos Estatísticos {.smaller}
+
+::: columns
+::: {.column width="60%"}
+![](figures/dbc1.png){width="70%"}
+:::
+
+::: {.column width="40%"}
+::: {style="font-size: 1.5em; text-align: left"}
+Modelos estocásticos que são representações simplificadas da realidade através de equações matemáticas
+
+::: {style="font-size: 1.5em; text-align: left"}
+$$ \mathbf y = \mathbf X \boldsymbol \beta + \mathbf Z \mathbf u + \mathbf e$$
+:::
+:::
+:::
+:::
+
+## Modelos Estatísticos {.smaller}
+
+::: columns
+::: {.column width="60%"}
+![](figures/dbc2.png){width="120%"}
+:::
+
+::: {.column width="40%"}
+\
+\
+\
+
+::: {style="font-size: 1.7em; text-align: left"}
+$$ \mathbf y = \mathbf X \boldsymbol \beta + \mathbf Z \mathbf u + \mathbf W \mathbf i + \mathbf e$$
+:::
+:::
+:::
+
+## Medidas Repetidas
+
+::: columns
+::: {.column width="50%"}
+\
+
+![](figures/rep.png){width="200%"}
+:::
+
+::: {.column width="50%"}
+\
+\
+\
+
+::: {style="font-size: 1em; text-align: left"}
+$$ \mathbf y = \mathbf X \boldsymbol \beta + \mathbf Z \mathbf u + \mathbf W \mathbf i + \mathbf T \mathbf p + \mathbf e$$
+
+![](figures/figures/relogio.png){fig-align="center"}
+:::
+:::
+:::
+
+## Natureza do Efeito
+
+![](figures/nat_efeito.png){width="120%" fig-align="center"}
+
+::: columns
+::: {.column width="50%"}
+::: {style="font-size: 0.6em; text-align: left"}
+-   Níveis dos fatores não alteram (Princípio ativo de defensivos)
+
+$$ H_0 = m_{A1} = m_{A2} = m_{A3}$$
+:::
+:::
+
+::: {.column width="50%"}
+::: {style="font-size: 0.6em; text-align: left"}
+-   Não repete os mesmos níveis (amostragem aleatória de uma distribuição de densidade)
+
+-   Posso expandir as inferência para outros níveis
+
+$$H_0 = \sigma^2_x = 0$$
+:::
+:::
+:::
+
+## Efeito aleatório {.smaller}
+::: {.fragment .fade-in}
+::: {.fragment .semi-fade-out}
+-   Não tem interesse em testar uma hipótese de diferença entre níveis
+:::
+:::
+
+::: {.fragment .fade-in}
+::: {.fragment .semi-fade-out}
+-   Quer quantificar a variabilidade entre níveis
+:::
+:::
+
+::: {.fragment .fade-in}
+::: {.fragment .semi-fade-out}
+-   Quer fazer predições sobre níveis não observados
+:::
+:::
+
+::: {.fragment .fade-in}
+::: {.fragment .semi-fade-out}
+-   Tem níveis que são amostras aleatórias representativas de uma população maior
+:::
+:::
+
+::: {.fragment .fade-in}
+::: {.fragment .semi-fade-out}
+-   Interessados na variabilidade da variável aleatória:
+    -   Necessito de um número mínimo de níveis na variável aleatória (geralmente cinco) para conseguimos estimar esta variação com certa confiabilidade
+
+$$H_0 = \sigma^2_x = 0$$
+:::
+:::
+
+## Delineamento em Blocos Casualizados {.smaller}
+
+
+::: columns
+::: {.column width="50%"}
+
+![](figures/fisher_jovem.jpeg){width="500"}
+:::
+
+::: {.column width="50%"}
+
+![](figures/fisher_velho.jpeg){width= "80"}
+
+:::
+:::
+
+## Delineamento em Blocos Casualizados {.smaller}
+
+::: columns
+::: {.column width="50%"}
+![](figures/dbc1.png){width="400"}
+:::
+
+::: {.column width="50%"}
+$$ \mathbf y = \mathbf X \boldsymbol \beta + \mathbf Z \mathbf u + \mathbf e $$\
+
+$\boldsymbol \beta$ = bloco (fixo) 
+
+$\mathbf u$ = genético (aleatório) 
+
+$\mathbf e$ = resíduo (aleatório)
+\
+
+$$ \begin{equation}
+\begin{bmatrix}
+ {\bf u} \\
+ {\bf e} \\ 
+ \end{bmatrix}  \sim N
+ \left( \mathbf 0, 
+ \begin{bmatrix}
+ {\sigma_{\text{u}}^2} \mathbf K &{\mathbf 0} \\
+ {\mathbf 0} & {\sigma_{\text{e}}^2} \mathbf R \\ 
+ \end{bmatrix} \right) 
+ \end{equation} $$
+:::
+:::
+
+## Equações de Modelos Mistos (Henderson 1959, 1963)
+
+\
+
+$$ \mathbf y = \mathbf X \boldsymbol \beta + \mathbf Z \mathbf u + \mathbf e$$\
+
+$$\begin{equation}
+\begin{bmatrix}
+ {\mathbf X^´ \mathbf X} & { \mathbf X^´ \mathbf Z}\\
+ {\mathbf Z^´ \mathbf X} & {\mathbf Z^´\mathbf Z + \lambda \mathbf K^{-1}} \\ 
+ \end{bmatrix}
+ \begin{bmatrix}
+ \mathbf {\hat{b}} \\
+ \mathbf {\hat{u}} \\ 
+ \end{bmatrix}=
+ \begin{bmatrix}
+ {\mathbf X^´ \mathbf y}\\
+ {\mathbf Z^´ \mathbf y}
+ \end{bmatrix}
+ \end{equation}$$
+
+## Shrinkage
+
+::: columns
+::: {.column width="50%"}
+![](BLUP.webp)
+
+::: {style="font-size: 0.7em; text-align: left"}
+@piephoBLUPPhenotypicSelection2008
+:::
+:::
+
+::: {.column width="50%"}
+$$BLUE_i = \hat{a_i} = (\bar{y_i} - \bar{y})$$
+<br>
+
+$$BLUP_i = \hat{a_i} = \frac{\sigma_a^2}{\sigma_a^2 + \sigma_e^2/n}(\bar{y_i} - \bar{y})$$
+:::
+:::
+
+## 
+
+\
+\
+\
+
+::: {style="font-size: 5em; text-align: center"}
+REML/BLUP
+:::
+
+## 
+
+Assume que os parâmetros seguem uma distribuição Normal -- tenho que estimar os parâmetros\
+\
+
+![](figures/par.png){fig-align="center" width="100%"}
+
+## 
+
+![](figures/reml.png){fig-align="center" width="100%"}
+
+::: {style="font-size: 0.7em; text-align:right"}
+@pattersonRecoveryInterblockInformation1971
+:::
+
+## 
+
+\
+\
+
+::: {style="font-size: 4em; text-align: center"}
+REML
+:::
+
+::: {style="font-size: 1.5em; text-align: center"}
+Restricted/residual Maximum Likelihood
+:::
+
+\
+
+::: {style="font-size: 0.8em; text-align: center"}
+"Encontrar uma boa maneira de ajustar uma distribuição aos dados"
+:::
+
+## 
+
+![](figures/reml2.png){fig-align="center"}
+
+## 
+
+![](figures/reml3.png){fig-align="center"}
+
+## 
+
+\
+\
+
+::: {style="font-size: 4em; text-align: center"}
+BLUP
+:::
+
+::: {style="font-size: 1.5em; text-align: center"}
+Best Linear Unbiased Prediction
+:::
+
+\
+
+::: {style="font-size: 0.8em; text-align: center"}
+"Calcular valores genéticos errando pouco"
+:::
+
+::: {style="font-size: 0.7em; text-align:right"}
+@hendersonBestLinearUnbiased1975
+:::
+
+##  {.smaller}
+
+$$ \mathbf y = \mathbf X \boldsymbol \beta + \mathbf Z \mathbf u + \mathbf e$$
+
+$$\begin{equation}
+\begin{bmatrix}
+ {\mathbf X^´ \mathbf X} & { \mathbf X^´ \mathbf Z}\\
+ {\mathbf Z^´ \mathbf X} & {\mathbf Z^´ \mathbf Z + \lambda_1 \mathbf K^{-1}} \\ 
+ \end{bmatrix}
+ \begin{bmatrix}
+ \mathbf{\hat{b}} \\
+ \mathbf{\hat{u}} \\ 
+ \end{bmatrix}=
+ \begin{bmatrix}
+ {\mathbf X^´ \mathbf y}\\
+ {\mathbf Z^´ \mathbf y}
+ \end{bmatrix}
+ \end{equation}$$
+
+\
+
+$$ \mathbf y = \mathbf X \boldsymbol \beta + \mathbf Z \mathbf u + \color{red}{\mathbf W\mathbf p}+ \mathbf e$$
+
+$$\begin{equation}
+\begin{bmatrix}
+ {\mathbf X^´ \mathbf X} & { \mathbf X^´\mathbf Z} & \color{red}{\mathbf X^´\mathbf W}\\
+ {\mathbf Z^´ \mathbf X} & {\mathbf Z^´\mathbf Z + \lambda_1 \mathbf K^{-1}} & \color{red}{\mathbf Z^´\mathbf W}\\ 
+ \color{red}{\mathbf W^´ \mathbf X} & \color{red}{\mathbf W^´ \mathbf Z}  & \color{red}{\mathbf W^´ \mathbf W + \lambda_2 \mathbf K^{-1}}
+ \end{bmatrix}
+ \begin{bmatrix}
+ \hat{\mathbf b} \\
+ \hat{\mathbf u} \\ 
+ \color{red}{\hat{\mathbf p}}
+ \end{bmatrix}=
+ \begin{bmatrix}
+ {\mathbf X^´ \mathbf y}\\
+ {\mathbf Z^´ \mathbf y}\\
+ \color{red}{\mathbf W^´ \mathbf y}\\
+ \end{bmatrix}
+ \end{equation}$$
+
+::: columns
+::: {.column width="\"50%"}
+$$\lambda_1 = (1- h^2)/ h^2$$ $$h^2 = \sigma_g^2 / \sigma_f^2$$
+:::
+
+::: {.column width="50%"}
+$$\lambda_2 = (1- h^2- C^2)/ C^2$$
+
+$$h^2 = \sigma_p^2 / \sigma_f^2$$
+:::
+:::
+
+## 
+
+\
+
+![](figures/mm2.png){width="3500"}
+
+## 
+
+![](figures/mm3.png){fig-align="center"}
+
+## Resolvendo as equações de Modelos Mistos
+
+$$\begin{equation}
+\begin{bmatrix}
+ {\mathbf X^´ \mathbf X} & { \mathbf X^´ \mathbf Z}\\
+ {\mathbf Z^´ \mathbf X} & {\mathbf Z^´ \mathbf Z + \lambda_1 \mathbf K^{-1}} \\ 
+ \end{bmatrix}
+ \begin{bmatrix}
+ \hat{\mathbf b} \\
+ \hat{\mathbf u} \\ 
+ \end{bmatrix}=
+ \begin{bmatrix}
+ {\mathbf X^´ \mathbf y}\\
+ {\mathbf Z^´ \mathbf y}
+ \end{bmatrix}
+ \end{equation}$$
+
+$$\begin{bmatrix}
+ \hat{\mathbf b} \\
+ \hat{\mathbf u} \\ 
+ \end{bmatrix} = 
+ \begin{bmatrix}
+ {\mathbf X^´ \mathbf y}\\
+ {\mathbf Z^´ \mathbf y}
+ \end{bmatrix}
+ \begin{equation}
+\begin{bmatrix}
+ {\mathbf X^´ \mathbf X} & { \mathbf X^´ \mathbf Z}\\
+ {\mathbf Z^´ \mathbf X} & {\mathbf Z^´ \mathbf Z + \lambda_1 \mathbf K^{-1}} \\ 
+ \end{bmatrix}^{-1}
+ \end{equation}$$
+
+## Resolvendo as equações de Modelos Mistos
+
+![](figures/mm5.png){fig-align="center"}
+
+Devo utilizar medidas de precisão como a `acurácia seletiva`
+
+## Parâmetros genéticos {.smaller}
+
+-   `Acurácia`: Mede se o método de seleção adotado propicia uma inferência precisa e realista
+
+**Acurácia seletiva**
+
+$$
+r = \sqrt{1- \frac{PEV}{\sigma^2_g}}
+$$
+
+Em que $PEV$ é a variância do erro de predição
+
+-   É influenciada pela quantidade $(1-r)$
+
+## Acurácia seletiva {.smaller}
+
+::: {.fragment .fade-in}
+::: {.fragment .semi-fade-out}
+-   No contexto da avaliação genotípica, o parâmetro estatístico mais importante é a acurácia seletiva
+:::
+:::
+
+::: {.fragment .fade-in}
+::: {.fragment .semi-fade-out}
+-   Este parâmetro refere-se à correlação entre o valor genotípico verdadeiro do tratamento genético e aquele estimado ou predito a partir das informações dos experimentos.
+:::
+:::
+
+::: {.fragment .fade-in}
+::: {.fragment .semi-fade-out}
+-   Como correlação, varia de 0 a 1, e os valores adequados de acurácia são aqueles próximos à unidade ou 100%.
+:::
+:::
+
+::: {.fragment .fade-in}
+::: {.fragment .semi-fade-out}
+-   Logo, é natural que valores elevados de acurácia sejam almejados nos experimentos de avaliação de cultivares
+:::
+:::
+
+::: {style="font-size: 0.7em; text-align:right"}
+@resendePrecisaoControleQualidade2007
+:::
+
+## Acurácia Seletiva {.smaller}
+
+::: {.fragment .fade-in}
+::: {.fragment .semi-fade-out}
+-   **Fatores que influenciam a acurácia seletiva:**
+
+    -   Número de repetições;
+    -   Variância residual;
+    -   Proporção $\sigma_e^2/ \sigma_g^2$
+:::
+:::
+
+::: {.fragment .fade-in}
+::: {.fragment .semi-fade-out}
+-   **Classificação:**
+
+    -   Baixa (0 -- 0.49)
+    -   Moderada (0.50 -- 0.69)
+    -   Alta (0.70 - 0.89) - Recombinação
+    -   Multo alta (0.90 -- 1) - Recomendação
+:::
+:::
+
+::: {style="font-size: 0.7em; text-align:right"}
+@resendeLinearGeneralizedHierarchical2020
+:::
+
+## Herdabilidade {.smaller}
+
+-   `Herdabilidade`: Coeficiente de determinação que mede quanto da variabilidade existente em uma população segregante é devido a causas genéticas. Sentido amplo, se contemplar os efeitos genotípicos, sentido restrito quando somente os efeitos genéticos aditivos estiverem sendo considerados.
+
+::: columns
+:::{.column width="50%"}
+$$
+H^2=\frac{\sigma^2_g}{{\sigma^2_f}}
+$$
+
+$$
+h^2=\frac{\sigma^2_a}{{\sigma^2_f}}
+$$
+:::
+:::{.column width="50%"}
+$$
+H^2_m=\frac{\sigma^2_g}{\overline{\sigma^2_f}}
+$$
+
+$$
+h^2_m=\frac{\sigma^2_a}{\overline{\sigma^2_f}}
+$$
+:::
+:::
+
+
+## Herdabilidade
+
+::: {.fragment .fade-in}
+::: {.fragment .semi-fade-out}
+-   Estabelecer estratégias de seleção 
+:::
+:::
+
+::: {.fragment .fade-in}
+::: {.fragment .semi-fade-out}
+-   Informa sobre o controle genético de cada caráter a ser melhorado
+:::
+:::
+
+::: {.fragment .fade-in}
+::: {.fragment .semi-fade-out}
+-   Quanto maior a herdabilidade maior o controle genético do caráter
+:::
+:::
+
+::: {.fragment .fade-in}
+::: {.fragment .semi-fade-out}
+-   Indica a facilidade de se praticar o melhoramento daquele caráter
+:::
+:::
+
+::: {style="font-size: 0.7em; text-align:right"}
+@resendeLinearGeneralizedHierarchical2020
+:::
+
+## Herdabilidade
+
+
+### Classificação das herdabilidade:
+
+-   Baixa (0 -- 0.15)
+-   Moderada (0.15 -- 0.50)
+-   Alta (0.50 -- 0.80)
+-   Muito alta (0.80 -- 1)
+
+-   A `acurácia` e a `herdabilidade` são dois parâmetros genéticos muito importantes no melhoramento
+
+::: {style="font-size: 0.7em; text-align:right"}
+@resendeLinearGeneralizedHierarchical2020
+:::
+
+## Vantagens dos Modelos Mistos
+
+::: columns
+::: {.column width="60%"}
+::: {.fragment .fade-in}
+::: {.fragment .semi-fade-out}
+**Modelos lineares Fixos:**
+
+Independência entre as observações. 
+
+Relação linear: $y = \alpha + \beta x$\
+:::
+:::
+
+
+::: {.fragment .fade-in}
+::: {.fragment .semi-fade-out}
+**Modelos lineares Mistos:**
+
+Relaxa a pressuposição da independência entre observações
+
+Considera a correlação entre níveis
+:::
+:::
+:::
+
+::: {.column width="30%"}
+![](figures/tesoura.jpg)
+:::
+:::
+
+
+## Vantagens dos Modelos Mistos
+
+\
+
+![](figures/outros.png){fig-align="center" width="130%"}
+
+## Vantagens dos Modelos Mistos
+
+-   Maximiza o ganho genético e a eficiência dos programas de melhoramento
+
+-   Não exige balanceamento dos dados
+
+-   Permite utilizar simultaneamente um grande número de informações, gerando estimativas precisas
+
+::: {style="font-size: 0.7em; text-align:right"}
+@resendeLinearGeneralizedHierarchical2020
+:::
+
+# Análise de um experimento em DBC {background-color="#325A4B"}
+
+## Banco de dados {.smaller}
+
+:::: {.columns}
+
+::: {.column width="65%"}
+
+```{r}
+#| echo: true
+
+data = data.frame(
+  'gen' = factor(rep(paste0("G",1:5),2)),
+  'rept' = factor(rep(paste0("R",1:2),each= 5)),
+  'y' = c(18.36, 8.23, 16, 18.25, 9.95, 21.54, 7.25,10, 20, 10.01)
+)
+```
+
+```{r}
+
+datai = data.frame(
+  'gen' = factor(rep(paste0("G",1:5),2)),
+  'rept' = factor(rep(paste0("R",1:2),each= 5)),
+  'y' = c(18.36, 8.23, 16, 18.25, 9.95, 21.54, 7.25,10, 20, 10.01),
+  "row" = c(sample(1:5),sample(1:5)),
+  "col" = c(rep(1:2,each=5))
+)
+
+desplot(form = y ~ col * row, flip = T, text = gen, cex = 1.5, shorten = 'no',out1 = rept, data = datai, main = "Blocos completos casualizados", show.key = T,gg = T,ticks = F,ylab = "Linha", xlab = "Coluna")
+
+
+```
+
+
+:::
+
+::: {.column width="35%"}
+
+```{r echo=FALSE}
+
+data %>% kbl(escape = F, align = 'c') %>% 
+  kable_classic("hover",full_width = T, position="center", fixed_thead = T)
+
+```
+
+:::
+
+::::
+
+## Modelo {.smaller}
+
+::: {style="font-size: 1.2em; text-align:center"}
+$$
+\mathbf y =  \mathbf X \mathbf b + \mathbf Z \mathbf u + \mathbf e
+$$
+:::
+
+\
+\
+
+$\mathbf y \rightarrow$ vetor de observações (dimensão $n \times 1$)
+
+$\mathbf X \rightarrow$ matriz de incidência dos efeitos fixos de repetição (dimensão $n \times r$)
+
+$\mathbf b \rightarrow$ vetor dos efeitos fixos de repetição (dimensão $r \times 1$)
+
+$\mathbf Z \rightarrow$ matriz de incidência dos efeitos aleatórios de genótipo (dimensão $n \times g$)
+
+$\mathbf u \rightarrow$ vetor dos efeitos aleatórios de genótipos (dimensão $g \times 1$) \[$\mathbf u \sim N(\mathbf 0, \sigma^2_u \mathbf K)$\]
+
+$\mathbf e \rightarrow$ vetor dos efeitos residuais (dimensão $n \times 1$) \[$\mathbf e \sim N(\mathbf 0, \sigma^2_e \mathbf I)$\]
+
+
+## Distribuição marginal
+
+
+$$
+E(\mathbf y) = E(\mathbf X \mathbf b + \mathbf Z \mathbf u + \mathbf e) =  \mathbf X \mathbf b 
+$$
+
+$$
+V(\mathbf y) = V( \mathbf X \mathbf b + \mathbf Z \mathbf u + \mathbf e) = \mathbf Z V(\mathbf u) \mathbf Z' + V(\mathbf e) \\ V(\mathbf y) = \mathbf Z \mathbf G \mathbf Z' + \mathbf R = \mathbf H
+$$
+
+em que $\mathbf G$ e $\mathbf R$ são as matrizes de covariâncias dos efeitos genotípicos e residuais, respectivamente.
+
+Logo:
+
+$$
+\mathbf y \sim NMV( \mathbf X \mathbf b, \mathbf H)
+$$
+
+<br>
+
+## Equação de Modelos Mistos de Henderson
+
+-   Erros independentemente distribuídos: $\mathbf R = \mathbf I \sigma^2_e$
+
+-   Parentesco desconhecido: $\mathbf G = \mathbf I \sigma^2_g$
+
+$$
+\begin{bmatrix}
+\mathbf X' \mathbf X & \mathbf X' \mathbf Z \\
+\mathbf Z' \mathbf X & (\mathbf Z'\mathbf Z + \lambda \mathbf K^{-1})
+\end{bmatrix} 
+\begin{bmatrix}
+\mathbf b \\
+\mathbf u
+\end{bmatrix} = 
+\begin{bmatrix}
+\mathbf X' \mathbf y \\
+\mathbf Z' \mathbf y
+\end{bmatrix}
+$$
+
+## 
+
+$$
+\begin{bmatrix}
+\mathbf X' \mathbf X & \mathbf X' \mathbf Z \\
+\mathbf Z' \mathbf X & (\mathbf Z'\mathbf Z + \lambda \mathbf K^{-1})
+\end{bmatrix} 
+\begin{bmatrix}
+\mathbf b \\
+\mathbf u
+\end{bmatrix} = 
+\begin{bmatrix}
+\mathbf X' \mathbf y \\
+\mathbf Z' \mathbf y
+\end{bmatrix}
+$$
+
+$\mathbf b$ e $\mathbf u \rightarrow$ incógnitas. 
+
+$\mathbf K \rightarrow$ matriz de parentesco (parentesco desconhecido, $\mathbf K = \mathbf I$) 
+
+Assumindo componentes de variância conhecidos: $\sigma^2_e = 6,17$ e $\sigma^2_g = 26,42$
+
+$$\lambda = \frac{\sigma^2_e}{\sigma^2_u} = \frac{6,17}{26,42} = 0,23$$
+
+$\lambda \rightarrow$ fator de encolhimento:
+
+
+## Matrizes de incidência {.smaller}
+
+```{r echo=TRUE}
+X = model.matrix(y ~-1 + rept, data = data)
+Z = model.matrix(y ~-1 + gen, data= data)
+```
+
+::: columns
+::: {.column width="25%"}
+$$
+\mathbf X = \begin{bmatrix}
+1&0 \\
+1&0 \\
+1&0 \\
+1&0 \\
+1&0 \\
+0&1 \\
+0&1 \\
+0&1 \\
+0&1 \\
+0&1 \\
+\end{bmatrix}_{10\times2}
+$$
+:::
+
+::: {.column width="45%"}
+$$
+\mathbf Z = \begin{bmatrix}
+1&0&0&0&0 \\
+0&1&0&0&0 \\
+0&0&1&0&0 \\
+0&0&0&1&0 \\
+0&0&0&0&1 \\
+1&0&0&0&0 \\
+0&1&0&0&0 \\
+0&0&1&0&0 \\
+0&0&0&1&0 \\
+0&0&0&0&1 \\
+\end{bmatrix}_{10\times5}
+$$
+:::
+::: {.column width="30%"}
+```{r}
+data %>% kbl(escape = F, align = 'c') %>% 
+  kable_classic("hover",full_width = T, position="center", fixed_thead = T)
+```
+:::
+:::
+
+## Produtos {.smaller}
+
+-   Cada produto entre matrizes fornecerá um diagnóstico do conjunto de dados:
+
+::: columns
+::: {.column width="40%"}
+
+-   $\mathbf X' \mathbf X \rightarrow$ número de observações em cada repetição:
+
+```{r echo=TRUE}
+XlX = crossprod(X)
+```
+
+$$
+\mathbf X' \mathbf X = \begin{bmatrix}
+5&0 \\
+0&5 \\
+\end{bmatrix}_{2\times2}
+$$
+
+:::
+
+::: {.column width="50%"}
+
+-   $\mathbf Z' \mathbf Z \rightarrow$ número de observações por genótipo:
+
+```{r echo=TRUE}
+ZlZ = crossprod(Z)
+```
+
+$$
+\mathbf Z' \mathbf Z = \begin{bmatrix}
+2&0&0&0&0 \\
+0&2&0&0&0 \\
+0&0&2&0&0 \\
+0&0&0&2&0 \\
+0&0&0&0&2 \\
+\end{bmatrix}_{5\times5}
+$$
+
+:::
+:::
+
+## {.smaller}
+
+-   $\mathbf X' \mathbf Z \rightarrow$ número de observações de cada genótipo dentro de cada repetição:
+
+```{r echo=TRUE}
+XlZ = crossprod(X, Z)
+```
+
+$$
+\mathbf X' \mathbf Z = \begin{bmatrix}
+1&1&1&1&1 \\
+1&1&1&1&1 \\
+\end{bmatrix}_{2\times5}
+$$
+
+-   $\mathbf Z' \mathbf X \rightarrow$ número de observações de cada repetição dentro de cada genótipo:
+
+```{r echo=TRUE}
+ZlX = crossprod(Z, X)
+```
+
+$$
+\mathbf Z' \mathbf X = \begin{bmatrix}
+1&1 \\
+1&1 \\
+1&1 \\
+1&1 \\
+1&1 \\
+\end{bmatrix}_{5\times2}
+$$
+
+## 
+
+::: columns
+::: {.column width="50%"}
+
+-   $\mathbf X' \mathbf y \rightarrow$ soma dos valores observados por repetição:
+
+```{r echo=TRUE}
+Xly = crossprod(X, data$y)
+```
+
+$$
+\mathbf X' \mathbf y=\begin{bmatrix}
+70.79 \\
+68.80 \\
+\end{bmatrix}_{2\times1}
+$$
+
+:::
+
+::: {.column width="50%"}
+
+-   $\mathbf Z' \mathbf y \rightarrow$ soma dos valores observados por genótipo:
+
+```{r echo=TRUE}
+Zly = crossprod(Z, data$y)
+```
+
+$$
+\mathbf Z' \mathbf y=\begin{bmatrix}
+39.90 \\
+15.48 \\
+26.00 \\
+38.25 \\
+19.96 \\
+\end{bmatrix}_{5\times1}
+$$
+
+:::
+:::
+
+## Equação de MM {.smaller}
+
+<br>
+
+$$
+\begin{bmatrix}
+\begin{bmatrix}
+5&0 \\
+0&5 \\
+\end{bmatrix} & \begin{bmatrix}
+1&1&1&1&1 \\
+1&1&1&1&1 \\
+\end{bmatrix} \\
+\begin{bmatrix}
+1&1 \\
+1&1 \\
+1&1 \\
+1&1 \\
+1&1 \\
+\end{bmatrix} & \begin{bmatrix}
+2.23&0&0&0&0 \\
+0&2.23&0&0&0 \\
+0&0&2.23&0&0 \\
+0&0&0&2.23&0 \\
+0&0&0&0&2.23 \\
+\end{bmatrix}
+\end{bmatrix} 
+\begin{bmatrix}
+\mathbf b \\
+\mathbf u
+\end{bmatrix} = 
+\begin{bmatrix}
+\begin{bmatrix}
+70.79 \\
+68.80 \\
+\end{bmatrix} \\
+\begin{bmatrix}
+39.90 \\
+15.48 \\
+26.00 \\
+38.25 \\
+19.96 \\
+\end{bmatrix}
+\end{bmatrix}
+$$
+
+## BLUEs e BLUPs {.smaller}
+
+-   BLUEs:
+
+$$
+\mathbf b = (\mathbf X' \mathbf H^{-1} \mathbf X)^{-1} \mathbf X' \mathbf H^{-1} \mathbf y
+$$
+
+```{r echo=TRUE}
+sigma2g = 26.42
+sigma2e = 6.17
+
+G = sigma2g*diag(1,5)
+R = sigma2e*diag(1,10)
+
+H = tcrossprod(Z %*% G, Z) + R
+Hinv = solve(H)
+
+BLUE = solve(crossprod(X, Hinv) %*% X) %*% (crossprod(X, Hinv)%*%na.omit(data$y))
+```
+
+-   BLUPs:
+
+$$
+\mathbf u = \mathbf G \mathbf Z' \mathbf H^{-1}(\mathbf y - \mathbf  X \mathbf b)
+$$
+
+```{r echo=TRUE}
+
+BLUP = (tcrossprod(G, Z) %*% Hinv) %*% (data$y - X %*% BLUE)
+
+```
+
+## Solução
+
+$$
+\begin{bmatrix}
+\mathbf b = \begin{bmatrix}
+14.158 \\
+13.760
+\end{bmatrix}\\
+\mathbf u = \begin{bmatrix}
+5.364 \\
+-5.569 \\
+-0.859 \\
+4.626 \\
+-3.562 
+\end{bmatrix}
+\end{bmatrix} 
+$$
+
+
+## Se houver desbalanceamento? {.smaller}
+
+:::: {.columns}
+
+::: {.column width="65%"}
+
+```{r}
+#| echo: true
+data = data.frame(
+  'gen' = factor(rep(paste0("G",1:5),2)),
+  'rept' = factor(rep(paste0("R",1:2),each= 5)),
+  'y' = c(18.36, 8.23, 16, 18.25, NA, 21.54, NA,10, 20, 10.01)
+)
+```
+
+```{r}
+
+datai = data.frame(
+  'gen' = factor(rep(paste0("G",1:5),2)),
+  'rept' = factor(rep(paste0("R",1:2),each= 5)),
+  'y' = c(18.36, 8.23, 16, 18.25, NA, 21.54, NA,10, 20, 10.01),
+  "row" = c(sample(1:5),sample(1:5)),
+  "col" = c(rep(1:2,each=5))
+)
+
+desplot(form = y ~ col * row, flip = T, text = gen, cex = 1.5, shorten = 'no',out1 = rept, data = datai, main = "Blocos completos casualizados - Desbalanceado", show.key = T,gg = T,ticks = F,ylab = "Linha", xlab = "Coluna")
+
+
+```
+
+:::
+
+::: {.column width="35%"}
+
+```{r echo=FALSE}
+
+data %>% kbl(escape = F, align = 'c') %>% 
+  kable_classic("hover",full_width = T, position="center", fixed_thead = T)
+
+```
+
+:::
+
+::::
+
+<br>
+
+## Modelo
+
+Não há mudanças no modelo:
+
+$$
+\mathbf y =  \mathbf X \mathbf b + \mathbf Z \mathbf u + \mathbf e
+$$
+
+Manteremos as pressuposições e assumiremos que os componentes de variância são conhecidos:
+
+$\sigma^2_e = 11,93$ 
+
+$\sigma^2_g = 19,82$
+
+<br>
+
+## Matrizes de incidência {.smaller}
+
+```{r echo=TRUE}
+X = model.matrix(y ~ -1 + rept, data)
+Z = model.matrix(y~-1 + gen, data= data)
+```
+
+::: columns
+::: {.column width="25%"}
+$$
+\mathbf X = \begin{bmatrix}
+1&0 \\
+1&0 \\
+1&0 \\
+1&0 \\
+0&1 \\
+0&1 \\
+0&1 \\
+0&1 \\
+\end{bmatrix}_{8\times2}
+$$
+:::
+
+::: {.column width="45%"}
+$$
+\mathbf Z = \begin{bmatrix}
+1&0&0&0&0 \\
+0&1&0&0&0 \\
+0&0&1&0&0 \\
+0&0&0&1&0 \\
+1&0&0&0&0 \\
+0&0&1&0&0 \\
+0&0&0&1&0 \\
+0&0&0&0&1 \\
+\end{bmatrix}_{8\times5}
+$$
+:::
+::: {.column width="30%"}
+```{r}
+data %>% kbl(escape = F, align = 'c') %>% 
+  kable_classic("hover",full_width = T, position="center", fixed_thead = T)
+```
+:::
+:::
+
+
+## Produtos {.smaller}
+
+::: columns
+::: {.column width="40%"}
+
+```{r echo=TRUE}
+XlX = crossprod(X)
+```
+
+$$
+\mathbf X' \mathbf X = \begin{bmatrix}
+4&0 \\
+0&4 \\
+\end{bmatrix}_{2\times2}
+$$
+
+<br>
+
+```{r echo=TRUE}
+ZlX = crossprod(Z, X)
+```
+
+$$
+\mathbf Z' \mathbf X = \begin{bmatrix}
+1&1 \\
+1&0 \\
+1&1 \\
+1&1 \\
+0&1 \\
+\end{bmatrix}_{5\times2}
+$$
+:::
+
+::: {.column width="50%"}
+
+```{r echo=TRUE}
+ZlZ = crossprod(Z)
+```
+
+$$
+\mathbf Z' \mathbf Z = \begin{bmatrix}
+2&0&0&0&0 \\
+0&1&0&0&0 \\
+0&0&2&0&0 \\
+0&0&0&2&0 \\
+0&0&0&0&1 \\
+\end{bmatrix}_{5\times5}
+$$
+
+
+```{r echo=TRUE}
+XlZ = crossprod(X, Z)
+```
+
+$$
+\mathbf X' \mathbf Z = \begin{bmatrix}
+1&1&1&1&0 \\
+1&0&1&1&1 \\
+\end{bmatrix}_{2\times5}
+$$
+
+:::
+:::
+
+##
+
+::: columns
+::: {.column width="50%"}
+
+```{r echo=TRUE}
+Xly = crossprod(X, na.omit(data$y))
+```
+
+$$
+\mathbf X' \mathbf y=\begin{bmatrix}
+60.84 \\
+61.55 \\
+\end{bmatrix}_{2\times1}
+$$
+:::
+
+::: {.column width="50%"}
+
+```{r echo=TRUE}
+Zly = crossprod(Z, na.omit(data$y))
+```
+
+$$
+\mathbf Z' \mathbf y=\begin{bmatrix}
+39.90 \\
+8.23 \\
+26.00 \\
+38.25 \\
+10.01 \\
+\end{bmatrix}_{5\times1}
+$$
+
+:::
+:::
+
+A dimensão dos produtos é a mesma, independente do desbalanceamento!
+
+## BLUEs e BLUPs {.smaller}
+
+-   BLUEs:
+
+$$
+\mathbf b = (\mathbf X' \mathbf H^{-1} \mathbf X)^{-1} \mathbf X' \mathbf H^{-1} \mathbf y
+$$
+
+```{r echo=TRUE}
+sigma2g = 19.82
+sigma2e = 11.93
+
+G = sigma2g*diag(1,5)
+R = sigma2e*diag(1,8)
+
+H = tcrossprod(Z %*% G, Z) + R
+Hinv = solve(H)
+
+BLUE = solve(crossprod(X, Hinv) %*% X) %*% (crossprod(X, Hinv)%*%na.omit(data$y))
+```
+
+-   BLUPs:
+
+$$
+\mathbf u = \mathbf G \mathbf Z' \mathbf H^{-1}(\mathbf y - \mathbf  X \mathbf b)
+$$
+
+```{r echo=TRUE}
+
+BLUP = (tcrossprod(G, Z) %*% Hinv) %*% (na.omit(data$y) - X %*% BLUE)
+
+```
+
+## Solução
+
+$$
+\begin{bmatrix}
+\mathbf b = \begin{bmatrix}
+14.533 \\
+14.420
+\end{bmatrix}\\
+\mathbf u = \begin{bmatrix}
+4.216 \\
+-3.929 \\
+-1.125 \\
+3.582 \\
+-2.744 
+\end{bmatrix}
+\end{bmatrix} 
+$$
+
+## Exemplo prático {.smaller .scrollable}
+
+Agora que já temos uma ideia dos procedimentos por trás das análises, vamos utilizar os pacotes [asreml-R](https://asreml.kb.vsni.co.uk/wp-content/uploads/sites/3/ASReml-R-Reference-Manual-4.2.pdf)[butlerASRemlRReferenceManual2018], [lme4](https://cran.r-project.org/web/packages/lme4/index.html) [bates_lme4_2015] e [lme4breeding](https://cran.r-project.org/web/packages/lme4breeding/index.html) [bates_lme4_2015] em bancos de dados reais. 
+
+### Pacote necessário
+
+```{r echo=TRUE, results='hide', warning=FALSE}
+library(lme4)
+library(lme4breeding)
+library(asreml)
+```
+
+<br>
+
+### Banco de dados
+
+Utilizaremos um banco de dados disponível publicamente [neste link](https://github.com/saulo-chaves/Theo-grandiflorum-MH), referente ao artigo de @chavesLeveragingMultiharvestData2022. O banco de dados contém 34 tratamentos avaliados em blocos completos casualizados, com 5 a 10 repetições por tratamento (sim, é desbalanceado), os quais foram avaliados por nove anos consecutivos. Para realizar as análises, escolheremos somente um ano ("Yr5"):
+
+```{r echo=TRUE, results='hide'}
+data = read.table("data_cupu.txt", header = TRUE, sep = ";")
+data = data[data$Harvests == "Yr5",]
+head(data)
+
+```
+
+
+<!-- # ```{r echo=TRUE, results='hide'} -->
+<!-- # data = read.csv("https://raw.githubusercontent.com/saulo-chaves/Theo-grandiflorum-MH/main/data.csv",sep = ';') -->
+<!-- # data = data[data$Harvests == "Yr5",] -->
+<!-- #  -->
+<!-- # head(data) -->
+<!-- #  -->
+<!-- # ``` -->
+
+
+```{r echo=FALSE}
+library(tidyverse)
+library(kableExtra)
+head(data) %>%  kbl(escape = F, align = 'c') %>%
+  kable_classic("hover",full_width = T, position="center", fixed_thead = T)
+```
+
+<br>
+
+### Definindo os fatores
+
+Antes de montar o modelo, temos que transformas os vetores-coluna do conjunto de dados em fatores:
+
+```{r echo=TRUE}
+data = transform(data,
+                 Hybrids = factor(Hybrids),
+                 Replicates = factor(Replicates))
+
+str(data)
+```
+
+<br>
+
+### Modelo
+
+Antes de construir o modelo no pacote, é importante tê-lo em mente em termos lineares. No nosso caso, o modelo é o mesmo definido previamente nos exemplos manuais anteriores, com uma única diferença: a dimensão das matrizes e vetores:
+
+$$
+\mathbf y =  \mathbf X \mathbf b + \mathbf Z \mathbf u + \mathbf e
+$$
+
+Utilizando a sintaxe do ASReml-R, o modelo pode ser escrito da seguinte forma:
+
+```{r echo=TRUE}
+
+#asreml-R
+mod.dbc = asreml(fixed = yd ~ Replicates,
+               random = ~Hybrids,
+               data = data)
+
+
+```
+
+A atribuição à um objeto (no nosso caso, mod.dbc1) é imprescindível para obtenção dos resultados. Agora que já ajustamos o modelo, quais os próximos passos?
+
+<br>
+
+### 1. Teste de hipóteses
+
+Para modelos lineares mistos, a significância dos efeitos aleatórios é testadas via LRT (Likelihood Ratio Test):
+
+$$
+LRT = (-2 \times LogL_R) - (-2 \times LogL)
+$$
+isto é, a diferença entre o logaritmo do ponto máximo da função de verossimilhança residual entre um modelo completo e um modelo reduzido ($LogL_R$), isto é, sem o efeito em teste. Já temos o modelo completo, e, portanto, devemos ajustar o modelo reduzido ($\mathbf y = \mathbf X \mathbf b + \mathbf e$):
+
+```{r echo=TRUE, results='hide'}
+
+#asreml-R
+mod.dbc.red = asreml(fixed = yd ~ Replicates,
+               data = data)
+
+```
+
+Com os dois modelos, calculamos o LRT utilizando a função "lrt.asreml":
+
+```{r echo=TRUE}
+
+#asreml-R
+lrt.asreml(mod.dbc, mod.dbc.red)
+
+```
+
+Os valores do teste são comparados com os valores da distribuição $\chi^2$, com um grau de liberdade e o p-valor desejado (geralmente $p \le 0.05$ ou $p \le 0.01$). O número de graus de liberdade está relacionado com a diferença entre o número de parâmetros de um modelo para outro. Neste caso, a diferença é de somente um parâmetro: o efeito genotípico. Os valores $\chi^2$ que determinarão se o efeito é significativo ou não são:
+
+| p-valor    |   $\chi^2$  |
+|------------|-----|
+| $p \le 0.05$   |   3.84  |
+| $p \le 0.01$ |  6.63   |
+
+Portanto, conclui-se que o efeito genotípico é significativo à 1% de significância, pois $LRT > \chi^2$ ($8.44 > 6.63$). Neste caso, podemos focar nos demais resultados.
+
+<br>
+
+### 2. Componentes de variância
+
+O modelo fornecerá os componentes de variância dos efeitos aleatórios. No nosso exemplo, estes são o efeito genotípico e o efeito residual. O comando para obter os componentes de variância é:
+
+```{r echo=TRUE, results='hide'}
+summary(mod.dbc)$varcomp
+```
+
+```{r}
+s = summary(mod.dbc)$varcomp
+rownames(s) = c("Hybrid", "Residual")
+s %>% kbl(escape = T, align = 'c') %>%
+  kable_classic("hover",full_width = T, position="center")
+```
+
+Perceba que a todo momento, nos referimos à estes valores como "componentes de variância". De fato, eles compõem a variância total presente no experimento, dada pela variância fenotípica individual($\sigma^2_f$). Portanto, $\sigma^2_f$ é a soma dos componentes de variância do modelo:
+$$
+\sigma^2_f = \sigma^2_g + \sigma^2_e
+$$
+
+Esta variância pode ser ponderada pelo número de repetições, gerando a variância fenotípica a nível de médias:
+$$
+\overline{\sigma^2_f} = \sigma^2_g + \frac{\sigma^2_e}{r}
+$$
+
+em que $r$ é o número de repetições.
+
+No nosso conjunto de dados, teremos:
+
+```{r echo=TRUE}
+compvar = summary(mod.dbc)$varcomp
+sig2f = sum(compvar[,1]); sig2f
+sig2f_med = compvar["Hybrids","component"]+compvar["units!R","component"]/
+  nlevels(data$Replicates);sig2f_med
+```
+
+<br>
+
+### 3. Parâmetros genéticos
+
+Alguns parâmetros genéticos são muito úteis para realizar algumas inferências
+
+-   **Acurácia**
+$$
+r = \sqrt{1- \frac{PEV}{\sigma^2_g}}
+$$
+
+-   **Confiabilide**
+
+Em que $PEV$ é a variância do erro de predição.
+
+No nosso conjunto de dados, utilizaremos os seguintes comandos:
+
+```{r echo=TRUE, results='hide'}
+
+pred = predict(mod.dbc, classify = "Hybrids", vcov = T)
+
+PEVi = (pred$pvals$std.error)^2
+
+confi = 1-(PEVi/compvar["Hybrids","component"]) #Confiabilidade por tratamento
+acu = sqrt(1-mean(PEVi)/compvar["Hybrids","component"]) #Acurácia
+
+```
+
+<br>
+
+-   **Herdabilidade**
+
+  -   A nível de indivíduos
+
+$$
+H^2 =\frac{\sigma^2_g}{{\sigma^2_f}}
+$$
+
+  -   A nível de médias
+
+$$
+H^2 =\frac{\sigma^2_g}{\overline{\sigma^2_f}}
+$$
+
+
+```{r echo=TRUE, results='hide'}
+numrep = nlevels(data$Replicates)
+
+H2in = vpredict(mod.dbc, H2in ~ V1/(V1+V2))
+H2med = compvar["Hybrids","component"]/(compvar["Hybrids","component"]+
+                                          (compvar["units!R","component"]/numrep))
+```
+
+Em suma, temos:
+
+```{r echo=TRUE, results='hide'}
+data.frame(
+  "Parâmetro" = c("Acurácia","Herdabilidade (individual)","Herdabilidade (médias)"),
+  "Valor" = c(acu, H2in$Estimate, H2med)
+)
+```
+
+```{r}
+data.frame(
+  "Parâmetro" = c("Acurácia","Herdabilidade (individual)","Herdabilidade (médias)"),
+  "Valor" = c(acu, H2in$Estimate, H2med)
+)%>% kbl(escape = F, align = 'c',digits = 4) %>%
+  kable_classic("hover",full_width = F, position="center")
+```
+
+
+<br>
+
+### 4. Seleção
+
+Depois realizar o diagnóstico da população em estudo, podemos focar na seleção. O BLUP é a principal unidade de seleção para o melhoramento genético, por ponderar o desempenho do tratamento pela qualidade e quantidade de informações disponíveis [@piephoBLUPPhenotypicSelection2008]. Utilizando o ASReml-R, podemos ter o BLUP centralizado na média (média = 0), ou a média BLUP, isto é, o próprio BLUP somado ao intercepto do modelo. Previamente, já realizamos a função para obter a média BLUP:
+
+```{r echo=TRUE, results='hide'}
+
+pred = predict(mod.dbc, classify = "Hybrids")
+
+```
+
+O seguinte comando fornecerá um vetor com o BLUP centralizado na média:
+
+```{r echo=TRUE, results='hide'}
+
+summary(mod.dbc, coef=T)$coef.random
+
+```
+
+Unindo os dois e adicionando a confiabilidade por tratamento, teremos:
+
+```{r echo=TRUE, results='hide'}
+BLUP = cbind(pred$pvals[,1:2],summary(mod.dbc, coef=T)$coef.random[,1],confi)
+colnames(BLUP)[2:4] = c("Média BLUP", "BLUP", "Confiabilidade")
+BLUP
+```
+
+```{r}
+BLUP %>% kbl(escape = F, align = 'c',digits = 4) %>%
+  kable_classic("hover",full_width = F, position="center")
+```
+
+
+## Exemplo prático - Blocos incompletos {.smaller .scrollable}
+
+Nem sempre teremos as melhores condições para implantar o experimento. Por vezes, queremos testar um grande número de tratamentos que não possuem propágulos suficientes para que haja uma quantidade adequada de repetições. Outra situação comum é a limitação da área disponível para o experimento. De fato, a combinação das duas situações são corriqueiras no melhoramento. Neste caso, é comum montar experientos em blocos incompletos. Veja abaixo um comparativo entre o DBC e duas categorias de blocos incompletos, látice e blocos aumentados:
+
+```{r}
+library(desplot)
+library(agricolae)
+library(tidyverse)
+
+# 2 pesiticides
+TrtPest   <- paste0("P", 1:2)    # P1 & P2
+n_TrtPest <- n_distinct(TrtPest) # 2
+
+# 4 soil treatments
+TrtSoil   <- paste0("S", 1:4)    # S1 - S4
+n_TrtSoil <- n_distinct(TrtSoil) # 4
+
+# 6 fertilizer
+TrtFert   <- paste0("N", 1:6)    # N1 - N6
+n_TrtFert <- n_distinct(TrtFert) # 6
+
+# 15 genotpyes
+TrtGen    <- paste0("G", 1:15)   # G1 - G15
+n_TrtGen  <- n_distinct(TrtGen)  # 15
+
+# 2 check varieties
+Checks    <- c("Std_A", "Std_B")
+
+# number of replicates
+n_Reps    <- 3
+
+rcbd_out <- design.rcbd(trt = TrtSoil,
+                        r = n_Reps,
+                        seed = 42)
+
+# Add Row and Col
+rcbd_out$bookRowCol <- rcbd_out$book %>%
+  mutate(Row = block %>% as.integer) %>%
+  group_by(Row) %>%
+  mutate(Col = 1:n()) %>%
+  ungroup()
+
+# Plot field layout
+desplot(TrtSoil ~ Row + Col, flip = TRUE,
+        text = TrtSoil, cex = 1, shorten = "no",
+        out1 = block,
+        data = rcbd_out$bookRowCol,
+        main = "Blocos completos casualizados",
+        show.key = F, key.cex = 0.5,gg=T) +
+  labs(caption = 'Créditos: Dr. Paul Schmidt')
+```
+
+```{r results='hide'}
+alpha_out <- design.alpha(trt = TrtGen,
+                          k = 3,
+                          r = n_Reps,
+                          seed = 42)
+```
+
+```{r}
+# Add Row and Col
+alpha_out$bookRowCol <- alpha_out$book %>%
+  mutate(replication = paste0("Rep", replication),
+         Row = block %>% as.integer,
+         Col = cols  %>% as.integer)
+
+# Plot field layout
+desplot(TrtGen ~ Row + Col | replication, flip = TRUE,
+        out1 = replication,
+        out2 = block, out2.gpar = list(col = "black", lty = 3),
+        text = TrtGen, cex = 1, shorten = "no",
+        data = alpha_out$bookRowCol,
+        main = "Látice",
+        show.key = F)
+```
+
+
+```{r}
+augmented_out <- design.dau(trt1 = Checks,
+                            trt2 = TrtGen,
+                            r = n_Reps,
+                            seed = 42)
+
+# Add Row and Col
+augmented_out$bookRowCol <- augmented_out$book %>%
+  mutate(Col = block %>% as.integer,
+         Row = plots %>% str_sub(3,3) %>% as.integer)
+
+# Plot field layout
+desplot(trt ~ Row + Col, flip = TRUE,
+        out1 = block, out1.gpar = list(col = "black", lwd = 2, lty = 3),
+        text = trt, cex = 1, shorten = "no",
+        data = augmented_out$bookRowCol ,
+        main = "Blocos aumentados",
+        show.key = F, gg=T) +
+  labs(caption = 'Créditos: Dr. Paul Schmidt')
+```
+
+### Banco de dados
+
+A seguir, mostraremos um exemplo em um conjunto de dados reais cujos experimentos foram implantados em látice. Os dados estão disponíveis [neste link](https://github.com/saulo-chaves/Theo-grandiflorum-MH), e foram utilizados no artigo de @diasLeveragingProbabilityConcepts2022. O banco de dados contém 36 tratamentos avaliados em látice com 6 blocos e 2 repetições, em quatro locais diferentes. Para realizar as análises, escolheremos somente um local ("E15"):
+
+
+
+<!--```{r echo=TRUE, results='hide'}
+data.dbi = read.csv('https://raw.githubusercontent.com/Kaio-Olimpio/Probability-for-GEI/master/maize_dataset.csv')
+data.dbi = data.dbi[data.dbi$Location == 'E15',]
+head(data.dbi)
+
+```-->
+
+```{r echo=TRUE, results='hide'}
+data.dbi = read.table("data.dbi.txt", header = TRUE, sep=",")
+data.dbi = data.dbi[data.dbi$Location == 'E15',]
+head(data.dbi)
+
+```
+
+```{r echo=FALSE}
+head(data.dbi) %>%  kbl(escape = F, align = 'c') %>%
+  kable_classic("hover",full_width = T, position="center", fixed_thead = T)
+```
+
+<br>
+
+### Definindo os fatores
+
+```{r echo=FALSE}
+data.dbi = transform(data.dbi,
+                 Hybrid = factor(Hybrid),
+                 Rep = factor(Rep),
+                 Block = factor(Block))
+
+```
+
+<br>
+
+### Modelo
+
+No banco de dados temos os efeitos de repetição e bloco. Geralmente, o efeito de repetição é considerado fixo. Já o efeito de bloco geralmente é aleatório. Quando a recuperação da informação interblocos for interessante, utiliza-se o efeito de blocos como aleatório. Caso contrário, este é tido como fixo. No exemplo, consideraremos este efeito como aleatório. Portanto, nosso modelo será:
+
+$$
+\mathbf y =  \mathbf X \mathbf r + \mathbf Z_1 \mathbf u + \mathbf Z_2 \mathbf b +\mathbf e
+$$
+
+em que $\mathbf r$ é o vetor de efeitos de repetição acompanhado de sua matriz de incidência $\mathbf X$, $\mathbf u$ é o vetor de efeitos aleatórios de genótipos, com a matriz de incidência $\mathbf Z_i$; $\mathbf b$ é o vetor de efeito aleatórios de blocos dentro de repetições acompanhado de sua matriz de incidência $\mathbf Z_2$; e $\mathbf e$ é o vetor dos erros.
+
+No ASReml-R, o modelo é descrito como:
+
+```{r echo=TRUE, results='hide'}
+
+mod.dbi = asreml(fixed = GY ~ Rep,
+               random = ~Hybrid + Block,
+               data = data.dbi)
+mod.dbi = update(mod.dbi)
+
+```
+
+<br>
+
+Uma vez ajustado o modelo, seguiremos os mesmos passos vistos anteriormente para o experimento em DBC:
+
+<br>
+
+### 1. Teste de hipóteses
+
+```{r echo=TRUE, results='hide'}
+mod.dbi.red = asreml(fixed = GY ~ Rep,
+               random = ~ Block,
+               data = data.dbi)
+
+```
+
+```{r echo=TRUE}
+lrt(mod.dbi, mod.dbi.red)
+```
+
+
+<br>
+
+### 2. Componentes de variância
+
+Neste exemplo, estes os efeito aleatórios são os genotípico, de bloco e residual.
+
+```{r echo=TRUE, results='hide'}
+summary(mod.dbi)$varcomp
+```
+
+```{r}
+s = summary(mod.dbi)$varcomp
+rownames(s) = c("Block", "Hybrid" ,"Residual")
+s %>% kbl(escape = T, align = 'c') %>%
+  kable_classic("hover",full_width = T, position="center")
+```
+
+<br>
+
+### 3. Parâmetros genéticos
+
+Primeiro, calcularemos a acurácia e a confiabilidade por tratamento:
+
+```{r echo=TRUE, results='hide'}
+
+compvar = summary(mod.dbi)$varcomp
+
+pred = predict(mod.dbi, classify = "Hybrid", vcov = T)
+
+PEVi = (pred$pvals$std.error)^2
+
+confi = 1-(PEVi/compvar["Hybrid","component"]) #Confiabilidade por tratamento
+acu = sqrt(1-mean(PEVi)/compvar["Hybrid","component"]) #Acurácia
+
+```
+
+```{r}
+acu
+```
+
+Em seguida, calcularemos a herdabilidade:
+
+```{r echo=TRUE, results='hide'}
+
+H2 = vpredict(mod.dbi, h2 ~ V2/(V1+V2+V3))
+
+```
+
+```{r}
+H2
+```
+
+
+<br>
+
+### 4. Seleção
+
+Para obter a média BLUP:
+
+```{r echo=TRUE, results='hide'}
+
+pred = predict(mod.dbi, classify = "Hybrid")
+
+```
+
+Para o BLUP centralizado na média:
+
+```{r echo=TRUE, results='hide'}
+
+summary(mod.dbi, coef=T)$coef.random[grep("Hybrid", rownames(summary(mod.dbi, coef=T)$coef.random)),]
+
+```
+
+Unindo os dois e adicionando a confiabilidade por tratamento, teremos:
+
+```{r echo=TRUE, results='hide'}
+BLUP = cbind(pred$pvals[,1:2],
+             summary(mod.dbi, coef=T)$coef.random[grep("Hybrid", rownames(summary(mod.dbi, coef=T)$coef.random)),][,1],
+             confi)
+colnames(BLUP)[2:4] = c("Média BLUP", "BLUP", "Confiabilidade")
+BLUP
+```
+
+```{r}
+BLUP %>% kbl(escape = F, align = 'c',digits = 4) %>%
+  kable_classic("hover",full_width = F, position="center")
+```
+
+## Referências utilizadas nesta apresentação
+
+::: {#refs}
+:::
+
+## {background-color="#325A4B"}
+
+<br>
+
+<br>
+
+::: {style="font-size: 3em; text-align: center"}
+**Obrigado**
+:::
+
+<br>
+
+::: {style="font-size: .9em; text-align: center"}
+
+filipe.manoel\@unesp.br
+:::
+
+<br>
+
+<br>
+
+::: {style="font-size: .7em; text-align: left"}
+Até breve. :wave:
+:::
