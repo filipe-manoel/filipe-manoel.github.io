@@ -15,13 +15,11 @@ This is a short course taught at the São Paulo State University in the Fall of 
 
 ### Script
 
-- Example in lme4 [[Code]](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/filipe-manoel/filipe-manoel.github.io/blob/master/talks_teach/MM_R_LAMPAF/exemplo_DBC_lme4.R)
+- Example in lme4 [[Code]](https://raw.githubusercontent.com/filipe-manoel/filipe-manoel.github.io/master/talks_teach/MM_R_LAMPAF/exemplo_DBC_lme4.R)
 
 ### Data
 
-- Data [[externalData]](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/filipe-manoel/filipe-manoel.github.io/blob/master/talks_teach/MM_R_LAMPAF/data_cupu.txt)
-
-
+- Data [[externalData]](https://raw.githubusercontent.com/filipe-manoel/filipe-manoel.github.io/master/talks_teach/MM_R_LAMPAF/data_cupu.txt)
 
 ***
 Any questions about the analyses, please, contact me!   
