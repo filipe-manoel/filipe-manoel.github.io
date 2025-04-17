@@ -13,7 +13,7 @@ author_profile: true
 
 ### Motivation  
 
-![Optim](../assets/images/figura_anula_comp.png){:width="20%" align="right"}
+![Optim](../images/fig_comp.png){:width="50%" align="right"}
 
 The performance of individual plants and the accuracy of genetic selection can be strongly influenced by genetic competition among neighboring genotypes. To better account for these interactions, models that partition observed genotypic variation into direct genotypic effects (DGEs) and competition effects—also known as indirect genotypic effects (IGEs)—were introduced by Muir (2005) and further developed by Cappa and Cantet (2008) using frequentist and Bayesian approaches, respectively. Our work explores the practical implications of IGEs in eucalypt breeding, particularly in contexts such as early selection and multi-age evaluations. We also propose selection strategies that leverage the depth and reliability of the information provided by these models for each individual. Furthermore, we use these models to predict high-performing combinations of clonal composites under intergenotypic competition, aiming to enhance genetic gain and stand productivity.
 
@@ -41,59 +41,45 @@ A more didatic article about genetic competition can be found [here](https://vsn
 
 ***
 
-## Breeding programs simulations
-
-### Motivation
-![Imputation](../assets/images/Picture1.png){:width="30%" align="right"}
-
-Breeding programs are intricate and multifaceted systems that demand careful consideration when implementing tools and refining resource allocation. Simulating breeding programs has emerged as a valuable approach for assessing and fine-tuning various aspects of these programs. This simulation method serves as an ideal platform for evaluating the overarching strategy and the intricate details of breeding programs. This includes aspects like selection methods, program sizes, the number of testers, the integration of genomic selection tools, and the optimal number of environments to be included.
-
-- **Main topics:**
-  - **Decision-based breeding**  
-  - **Genomic selection implementation**
-  - **Parental selection and allocation**  
- 
-***
 
 ## Mixed models methodology
 
 ### Motivation
-![MixedMod](../assets/images/MixedModels.png){:width="30%" align="right"}
+![MixedMod](../assets/images/MixedModels.png){:width="20%" align="right"}
 
-Mixed models methodology has become a standard tool for evaluating data in breeding programs, offering numerous advantages that motivate researchers to embrace them as a powerful tool in plant breeding. These models enhance genetic-statistical analyses, increase the accuracy of selection, provide a better understanding of trait architectures, and facilitate the implementation of genomic selection in breeding programs. These benefits serve as strong motivation for researchers to embrace mixed models and harness their power in breeding programs.
+Mixed models have become a fundamental tool in the statistical analysis of breeding program data, particularly due to their ability to handle unbalanced datasets and complex experimental designs. They allow the modeling of random effects and covariance structures, increasing the precision of genetic parameter estimates and the reliability of selection decisions. These capabilities make mixed models especially suited for modern plant breeding, including applications in genomic selection.
 
 - **Mainly topics:**
   - **Variance components estimations**  
   - **Modelling**  
   - **Genomic selection**  
   - **Models with additive and non-additive effects**  
-  - **BLUEs and BLUPs**  
 
 ***
 
 
-## Markers panel imputation 
+## Cloned Progeny Trials 
 
 ### Motivation  
 
-![Imputation](../assets/images/Imputation_Marco.png){:width="30%" align="right"}
+![Imputation](../images/fig_CPT.png){:width="50%" align="right"}
 
-The implementation of Whole Genomic Selection has been proven as an important tool for increasing genetic gain in several breeding programs. However, the acquisition of such high-density covered markers represents a barrier to the implementation of WGS in breeding programs. One alternative is to input some markers rather than measure them directly, which could decrease the costs of WGS.
+ By combining progeny and clonal trials in a single step, Cloned Progeny Trials (CPT) allows genotypes to be tested as clones from the start, improving the accuracy of genetic evaluation and saving valuable time in the breeding cycle. This is especially important for Eucalyptus species, which are highly productive and well-suited to clonal propagation. CPT improves the correlation between early and final performance, helps estimate genetic parameters more precisely, and supports faster decision-making. When integrated with genomic tools like SNP markers, CPT becomes even more powerful—making the breeding process more efficient and boosting genetic gains. For modern tree breeding, CPT is a key tool to deliver better clones, faster.
 
 - **Objective**  
-  - Evaluate the predictive ability of genomic values for some target traits in Sweet Corn when genotypes at some SNPs loci were imputed rather than measured directly.     
+Improve the correlation between individual (seedling) performance in initial (progeny trials) and final (clonal trials) stages of the breeding program. 
 
 ***
 
-## Genotype-by-environment interaction in potato breeding program
+## Partially inbred lines of eucalyptus
 
 ### Motivation  
 
 
-Large planted crops faces the
+Studying inbreeding-based strategies represents a significant advancement for the genetic improvement of forest species. While widely applied in annual crops, these approaches remain underexplored in perennial species such as Eucalyptus. Understanding the effects of self-pollination, the occurrence of inbreeding depression, and the contribution of non-additive genetic effects allows for the refinement of selection models and optimization of mating schemes. Moreover, the use of genomic tools enhances the ability to detect patterns of autozygosity and genetic variance, providing valuable support for more accurate and effective decision-making. By integrating this knowledge, it becomes possible to increase the efficiency of breeding programs, accelerate genetic gains, and ensure greater sustainability in forest production.
 
 - **Objective**  
-  - To recommend potato varietys for target population of environments.
+- Unravel the patterns of inbreeding depression in eucalyptus.
 
 ***
 
