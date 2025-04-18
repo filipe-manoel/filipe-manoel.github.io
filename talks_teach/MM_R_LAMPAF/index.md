@@ -22,7 +22,7 @@ This is a short course taught at the São Paulo State University in the Fall of 
 - Data [[externalData]](https://raw.githubusercontent.com/filipe-manoel/filipe-manoel.github.io/master/talks_teach/MM_R_LAMPAF/data_cupu.txt)
 
 ***
-Any questions about the analyses, please, contact me!   
+Any questions, please, contact me!   
 
 Dr. Filipe Manoel Ferreira  
 Email: ferreira.fmanoel@gmail.com  

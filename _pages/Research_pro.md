@@ -13,7 +13,7 @@ author_profile: true
 
 ### Motivation  
 
-![Optim](../images/fig_comp.png){:width="50%" align="right"}
+![Optim](../images/fig_comp.png){:width="30%" align="right"}
 
 The performance of individual plants and the accuracy of genetic selection can be strongly influenced by genetic competition among neighboring genotypes. To better account for these interactions, models that partition observed genotypic variation into direct genotypic effects (DGEs) and competition effects—also known as indirect genotypic effects (IGEs)—were introduced by Muir (2005) and further developed by Cappa and Cantet (2008) using frequentist and Bayesian approaches, respectively. Our work explores the practical implications of IGEs in eucalypt breeding, particularly in contexts such as early selection and multi-age evaluations. We also propose selection strategies that leverage the depth and reliability of the information provided by these models for each individual. Furthermore, we use these models to predict high-performing combinations of clonal composites under intergenotypic competition, aiming to enhance genetic gain and stand productivity.
 
@@ -45,7 +45,7 @@ A more didatic article about genetic competition can be found [here](https://vsn
 ## Mixed models methodology
 
 ### Motivation
-![MixedMod](../assets/images/MixedModels.png){:width="20%" align="right"}
+![MixedMod](../assets/images/MixedModels.png){:width="30%" align="right"}
 
 Mixed models have become a fundamental tool in the statistical analysis of breeding program data, particularly due to their ability to handle unbalanced datasets and complex experimental designs. They allow the modeling of random effects and covariance structures, increasing the precision of genetic parameter estimates and the reliability of selection decisions. These capabilities make mixed models especially suited for modern plant breeding, including applications in genomic selection.
 
@@ -62,7 +62,7 @@ Mixed models have become a fundamental tool in the statistical analysis of breed
 
 ### Motivation  
 
-![Imputation](../images/fig_CPT.png){:width="50%" align="right"}
+![Imputation](../images/fig_CPT.png){:width="30%" align="right"}
 
  By combining progeny and clonal trials in a single step, Cloned Progeny Trials (CPT) allows genotypes to be tested as clones from the start, improving the accuracy of genetic evaluation and saving valuable time in the breeding cycle. This is especially important for Eucalyptus species, which are highly productive and well-suited to clonal propagation. CPT improves the correlation between early and final performance, helps estimate genetic parameters more precisely, and supports faster decision-making. When integrated with genomic tools like SNP markers, CPT becomes even more powerful—making the breeding process more efficient and boosting genetic gains. For modern tree breeding, CPT is a key tool to deliver better clones, faster.
 

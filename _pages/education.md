@@ -9,21 +9,22 @@ redirect_from:
 
 {% include base_path %}
 
-* **2023-currently**: Postdoctoral Researcher, University of Florida - USA. Supervisor: Dr. Márcio Resende
 
-* **2021-2023**: Visiting Research Scholar, University of Florida - USA. Supervisor: Dr. Márcio Resende
+* **2023-currently**: Postdoctoral Researcher, São Paulo State University - Brazil. Supervisor: Dr. Evandro Tambarussi
 
-* **2019-2023**: Ph.D in Genetics and Breeding, Federal University of Viçosa - Brazil. Supervisor: Dr. Leonardo Lopes Bhering
+* **2020-2023**: Ph.D in Genetics and Breeding, Federal University of Viçosa - Brazil. Supervisor: Dr. Leonardo Bhering
 
-* **2014-2016**: M.S. in Animal Biology, Federal University of Viçosa - Brazil
+* **2018-2020**: M.S. in in Genetics and Breeding, Federal University of Viçosa - Brazil. Supervisor: Dr. Leonardo Bhering
 
-* **2009-2014**: B.S. in Biology, Federal University of Viçosa - Brazil
+* **2013-2014**: Scholarship in Forest Engineering, University of Montana - United States
 
-
-
+* **2011-2017**: B.S. in Forest Engineering, Federal University of Viçosa - Brazil
 
 
-[Download CV here](https://github.com/marcopxt/marcopxt.github.io/blob/master/files/MPeixotoCV.pdf)
+
+
+
+[Got to my CV Lattes](http://lattes.cnpq.br/4384041306911512)
 
 
 

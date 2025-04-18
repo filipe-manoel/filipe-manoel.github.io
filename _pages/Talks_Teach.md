@@ -8,13 +8,13 @@ author_profile: true
 {% include base_path %}
 
 
+
+### Workshop and Talks
+
+- [Linear Mixed Models - FCA/UNESP - Fall/2025](https://github.com/filipe-manoel/filipe-manoel.github.io/blob/master/talks_teach/MM_R_LAMPAF/index.md)
+
 ### Classes
 
-- [Quantitative Genetics - Fall/2022](https://github.com/marcopxt/marcopxt.github.io/blob/master/talks_teach/QuantGen/index.md)
-
-### Workshop and Talks 
-
-- [Multi-Omics course - Summer/2023](https://github.com/marcopxt/marcopxt.github.io/blob/master/talks_teach/Multi_Omics23/index.md)
 
 
 ### Others
