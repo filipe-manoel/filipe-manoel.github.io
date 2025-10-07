@@ -23,8 +23,8 @@ Feel free to contact me:
 **Filipe Manoel Ferreira**  
 Laboratório de Genética Biométrica e Melhoramento Florestal (LAGEMF)  
 (Biometrical Genetics and Tree Improvement Laboratory)
-
-Forest Sciences Department (LCF) | Esalq - University of São Paulo (USP)
+Forest Sciences Department (LCF)
+Esalq - University of São Paulo (USP)
 
 filipeferreira@usp.br
 
