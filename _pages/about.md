@@ -21,7 +21,8 @@ I have experience in forest breeding, quantitative genetics, and experimental da
 Feel free to contact me:  
 
 **Filipe Manoel Ferreira**  
-*3Lab: Tree Genetics and Breeding Laboratory*  
+*LAGEMF:Laboratório de Genética Biométrica e Melhoramento Florestal *  
+(Biometrical Genetics and Tree Improvement Laboratory)
 Forest Sciences Department (LCF) | Esalq - University of São Paulo (USP)
 ferreira.fmanoel@gmail.com  
 +55 (32) 99941-8878 
