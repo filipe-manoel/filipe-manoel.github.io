@@ -10,7 +10,7 @@ redirect_from:
 
 <br>
 
-Hi! My name is **Filipe Manoel Ferreira**.
+Hi! My name is **Filipe Manoel Ferreira**. <br>
 I hold a Ph.D. and a Master’s degree from the Graduate Program in Genetics and Breeding at UFV. I also studied Forest Engineering at the DEF of UFV and in the University of Montana (EUA) and earned a Forest Technician degree at IFET-Rio Pomba. Currently, I am a postdoctoral researcher at FCA-UNESP. 
 I have experience in forest breeding, quantitative genetics, and experimental data analysis. My research focuses on developing statistical genetics tools, mixed models, genomic selection, and programming. I believe breeding is increasingly connected with data science, so my goal is to develop and implement analytical tools that transform breeding data into knowledge, guiding decisions and ultimately improving genetic gain.
 
@@ -21,12 +21,12 @@ I have experience in forest breeding, quantitative genetics, and experimental da
 Feel free to contact me:  
 
 **Filipe Manoel Ferreira**  
-Laboratório de Genética Biométrica e Melhoramento Florestal (LAGEMF)  
-(Biometrical Genetics and Tree Improvement Laboratory)
-Forest Sciences Department (LCF)
-Esalq - University of São Paulo (USP)
+Laboratório de Genética Biométrica e Melhoramento Florestal (LAGEMF)<br>
+(Biometrical Genetics and Tree Improvement Laboratory)<br>
+Forest Sciences Department (LCF)<br>
+Esalq - University of São Paulo (USP)<br>
 
-filipeferreira@usp.br
+Email: filipeferreira@usp.br
 
 <br>
 
